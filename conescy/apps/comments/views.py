@@ -3,7 +3,8 @@ from dateutil.parser import *
 
 from django.http import *
 from django.template import RequestContext
-from django.views.decorators.http import login_required, require_POST
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 
 from conescy.apps.comments.models import Comment

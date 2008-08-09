@@ -123,8 +123,9 @@ def tag_list(request, tag, app=False, **kwargs):
     return object_list(request, e, **kwargs)
 
 
-def search(request, **kwargs):
-    """A really simple (and generic) search engine. Add 'app' as a keyword-argument if you want to use this for one app only."""
+def search(request, app=False, **kwargs):
+    """A really simple (and generic) search engine. 
+    Add 'app' as a (keyword-)argument if you want to use this for one app only. You cas specify the templates by adding 'template_ajax' and/or 'template_name' as keyword-arguments."""
     from django.db.models import Q
     
     if request.GET.get("s", False):
@@ -133,7 +134,7 @@ def search(request, **kwargs):
         # todo: add an error view!
         return render_to_response("error.html", {'error': 'You need to send a searchstring to search for something...'}, context_instance=RequestContext(request))
     
-    app = kwargs.get("app", False)
+    if app == False: app =  kwargs.pop("app")
     
     if app:
         e = Entry.objects.select_related().filter(Q(app=app), Q(title__contains=s) | Q(content__contains=s))
@@ -144,5 +145,6 @@ def search(request, **kwargs):
         template_ajax = kwargs.get("template_ajax", False) or "search/results.html"
         return render_to_response(template_ajax, {'object_list': e, 'search': s}, context_instance=RequestContext(request))
     else:
+        if not kwargs.get("template_name", False): kwargs["template_name"] = "search/resultpage.html"
         return object_list(request, e, **kwargs)
 
