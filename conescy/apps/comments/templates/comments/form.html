@@ -1,0 +1,31 @@
+{% load comments_tags %}
+
+<h3>{% comments_count ref_app ref_id %} Comments</h3>
+<div id="comments">
+{% for comment in comments %}
+    <div class="comment" id="comment{{ comment.id }}">
+        <p><a href="{{ comment.url }}" class="black">{{ comment.get_author_name }}</a> ({{ comment.date|date:"d. M Y" }} at {{ comment.date|date:"H:i" }}{% if user.is_authenticated %}{% ifequal user.id comment.username %} <a href="{% url comments-delete comment.id %}" class="commentdelete" id="commentdelete{{ comment.id }}" title="delete">d</a>{% endifequal %}{% endif %})</p>
+            {{ comment.content|safe }}
+    </div>
+{% endfor %}
+</div>
+
+<h3 id="reply">Write a Comment</h3>
+<form action="{% url comments-save %}" method="post" accept-charset="utf-8">
+{% if user.is_authenticated %}
+    <p>Logged in as {{ user.username }}</p>
+    <input type="hidden" name="username" value="{{ user.id }}" id="username" />
+{% else %}
+    <p><input type="text" name="eins" value="{{ cookies.name }}" id="eins" /> Your Name</p>
+    <p><input type="text" name="zwei" value="{{ cookies.mail }}" id="zwei" /> EMail (private!)</p>
+    <p><input type="text" name="drei" value="{{ cookies.url }}" id="drei" /> Website</p>
+{% endif %}
+    
+    <input type="hidden" name="ref" value="{{ ref }}" id="ref" />
+    <input type="text" name="author" value="" id="author" style="display: none;" />
+        <em style="display:none;">Spam-Protection!</em>
+    
+    <textarea name="content" rows="8" cols="60"></textarea>
+    
+    <p><input type="submit" value="Send &rarr;" /></p>
+</form>
