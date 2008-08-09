@@ -1,0 +1,5 @@
+<ul class="tagcloud">
+{% for tag in tags %}
+	<li class="tagcloud{{tag.font_size}}"><a href="{% url tags-detail tag.name %}" title="{{ tag.count }} mal benutzt">{{ tag.name }}</a></li>
+{% endfor %}
+</ul>
