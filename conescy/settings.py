@@ -94,4 +94,5 @@ INSTALLED_APPS = (
     'tagging',                              # http://code.google.com/p/django-tagging
     
     'conescy.apps.everything',
+    'conescy.apps.comments',
 )
