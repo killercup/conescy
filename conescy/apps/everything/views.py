@@ -11,7 +11,11 @@ from django.views.generic.list_detail import object_list
 from conescy.apps.everything.models import Entry
 
 def author(request, author, app=False, **kwargs):
-    """Displays the articles one author has written"""
+    """This view displays the public entries one author has written.
+    
+It uses the Generic View ``object_list`` and accepts all of its options. The only required argument is the author's username (called ``author``). To only display the entries of one Everything instance you can also pass the Everything-app as either an argument or a keyword argument (both called ``app``).
+    
+To use this for a feed template, just add ``rss: True`` as keyword argument and the feed's title, description and site will be set automatically. The view also passes two variables as ``extra_context`` to the template: ``author`` which contains the author's username (the required argument) and ``special``, which is usable as a heading ("All Articles by <author>")."""
     if app == False: app =  kwargs.pop("app")
     u = get_object_or_404(User, username=author)
     e = Entry.objects.filter(author=u, status="public", app=app).order_by("-created")
@@ -29,14 +33,18 @@ def author(request, author, app=False, **kwargs):
 
 
 def detail_comments(request, slug, app=False, **kwargs):
-    """A page (feed) with all comments made for an article. This depends on Conescy's comments app."""
+    """This view renders a page (e.g. a feed) with all (approved) comments made on an entry. This depends on Conescy's comments app, so be sure to have it in your ``INSTALLED_APPS``.
+    
+It uses the Generic View ``object_list`` and accepts all of its options. The only required argument is the entry's slug (called ``slug``). To only display the entries of one Everything instance you can also pass the Everything-app as either an argument or a keyword argument (both called ``app``).
+    
+To use this for a feed template, just add ``rss: True`` as keyword argument and the feed's title, description, link and site will be set automatically. The view also passes two variables as ``extra_context`` to the template: ``entry`` which contains the entry's slug (the required argument) and ``special``, which is usable as a heading ("Comment to <entry>")."""
     from conescy.apps.comments.models import Comment
     
     if app == False: app =  kwargs.pop("app")
     entry = get_object_or_404(Entry, slug=slug)
     
     cref = "%s.entry.%s" % (app, str(entry.id))
-    comments = Comment.objects.filter(ref=cref)
+    comments = Comment.objects.filter(ref=cref, status='ok')
     for c in comments:
         c.get_the_title = "Comment #%i to %s" % (c.id, entry.title)
         
@@ -53,11 +61,15 @@ def detail_comments(request, slug, app=False, **kwargs):
 
 
 def comments(request, app=False, **kwargs):
-    """A page (feed) with all comments for a specific app. Depends on Conescy's comments app."""
+    """This view renders a page (e.g. feed) with all (approved) comments for a specific app. This depends on Conescy's comments app, so be sure to have it in your ``INSTALLED_APPS``.
+    
+It uses the Generic View ``object_list`` and accepts all of its options. The only required argument is the Everything instance's name, which can also be given as keyword argument (both called ``app``).
+    
+To use this for a feed template, just add ``rss: True`` as keyword argument and the feed's title, description, link and site will be set automatically. The view also passes one variable as ``extra_context`` to the template, ``special``, which is usable as a heading ("Comments in <app>")."""
     from conescy.apps.comments.models import Comment
     
     if app == False: app =  kwargs.pop("app")
-    comments = Comment.objects.filter(ref__startswith="%s." % app)
+    comments = Comment.objects.filter(ref__startswith="%s." % app, status='ok')
     
     if not kwargs.get("extra_context", False): kwargs["extra_context"] = {}
     kwargs["extra_context"]["special"] = 'Comments in "%s"' % app.capitalize()
@@ -72,7 +84,21 @@ def comments(request, app=False, **kwargs):
 
 @login_required
 def import_rss(request, **kwargs):
-    """View for executing the RSS import (found in everything.imports)."""
+    """View for executing the RSS import (found in everything.imports). This view requires the user to be logged in.
+    
+If data is POSTed to this view, this view will try to import that data will the RSS importer. If this view is requested via GET it will render a template (which should offer an option for importing data by POSTing it to this view).
+    
+This view does not require any direct arguments, but you can specify the templates used with keyword arguments:
+    
+- ``template_load`` defines the template used to POST the data to this import view, default is ``admin/importrss/load.html``. This template will also get the content variable ``users`` which will contain a QuerySet with all ``User`` objects (e.g. to generate the user list).
+- ``template_finished`` defines the template used after importing the data, default is ``admin/importrss/finished.html``
+    
+The POSTed data should contain the following:
+    
+- the xml data in a field called ``xml``
+- the name in which Everything instance to copy the entries in a field called ``instance``
+- and the author's id which will set the author of all imported entries in a field called ``author``.
+    """
     from conescy.apps.everything import imports
     
     if request.method == "POST":
@@ -90,7 +116,21 @@ def import_rss(request, **kwargs):
 
 @login_required
 def import_wordpress(request):
-    """View for executing the Wordpress import (found in everything.imports)."""
+    """View for executing the Wordpress import (found in everything.imports). This is similar to RSS import but imports from Wordpress Export files instead (they contain some more information and all the comments!). This view requires the user to be logged in.
+    
+If data is POSTed to this view, this view will try to import that data will the Wordpress importer. If this view is requested via GET it will render a template (which should offer an option for importing data by POSTing it to this view).
+    
+This view does not require any direct arguments, but you can specify the templates used with keyword arguments:
+    
+- ``template_load`` defines the template used to POST the data to this import view, default is ``admin/importrss/load.html``. This template will also get the content variable ``users`` which will contain a QuerySet with all ``User`` objects (e.g. to generate the user list).
+- ``template_finished`` defines the template used after importing the data, default is ``admin/importrss/finished.html``
+    
+The POSTed data should contain the following:
+    
+- the xml data of the Wordpress Export file in a field called ``xml``
+- the name in which Everything instance to copy the entries in a field called ``instance``
+- and the author's id which will set the author of all imported entries in a field called ``author``.
+    """
     from conescy.apps.everything import imports
     
     if request.method == "POST":
@@ -104,7 +144,11 @@ def import_wordpress(request):
 
 
 def tag_list(request, tag, app=False, **kwargs):
-    """A list of entries for a tag, requires a keywordargument to know which everything instance should be used."""
+    """This view displays a list of public entries for one tag.
+    
+It uses the Generic View ``object_list`` and accepts all of its options. The only required argument is the tags's name (called ``tag`` of course). To only display the entries of one Everything instance you can also pass the Everything-app as either an argument or a keyword argument (both called ``app``).
+    
+To use this for a feed template, just add ``rss: True`` as keyword argument and the feed's title, description, link and site will be set automatically. The view also passes one variables as ``extra_context``, ``tag``, which contains the tags's name (the required argument)."""
     from tagging.models import Tag, TaggedItem
     
     if app == False: app =  kwargs.pop("app")
@@ -124,8 +168,15 @@ def tag_list(request, tag, app=False, **kwargs):
 
 
 def search(request, app=False, **kwargs):
-    """A really simple (and generic) search engine. 
-    Add 'app' as a (keyword-)argument if you want to use this for one app only. You cas specify the templates by adding 'template_ajax' and/or 'template_name' as keyword-arguments."""
+    """This view displays a list of public entries that match a given search string.
+    
+It uses the Generic View ``object_list`` and accepts all of its options. The only required argument is the search string, which has to be passed as GET-Parameter called ``s`` (e.g. ``/search/?s=searchstring``). To only display the entries of one Everything instance you can also pass the Everything-app as either an argument or a keyword argument (both called ``app``).
+    
+This view also accepts two other keyword arguments:
+    
+- ``template_ajax`` to set the template used to display on ajax requests, default is ``search/results.html``
+- ``template_name`` to set the template normally displayed, default is ``search/resultpage.html``
+    """
     from django.db.models import Q
     
     if request.GET.get("s", False):
@@ -143,6 +194,7 @@ def search(request, app=False, **kwargs):
     
     if request.is_ajax():
         template_ajax = kwargs.get("template_ajax", False) or "search/results.html"
+        # todo: make this use the object_list, too!
         return render_to_response(template_ajax, {'object_list': e, 'search': s}, context_instance=RequestContext(request))
     else:
         if not kwargs.get("template_name", False): kwargs["template_name"] = "search/resultpage.html"

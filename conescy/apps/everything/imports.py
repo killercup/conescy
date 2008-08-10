@@ -122,5 +122,5 @@ def rss(xml, instance, author):
             e.save()
             e.created = dateutil.parser.parse(i.findtext("pubDate"))
             e.save()
-            print "Imported Entry " + e.title
+            # print "Imported Entry " + e.title
         

@@ -89,6 +89,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.flatpages',
     
     'tagging',                              # http://code.google.com/p/django-tagging
@@ -96,3 +97,5 @@ INSTALLED_APPS = (
     'conescy.apps.everything',
     'conescy.apps.comments',
 )
+
+CACHE_BACKEND = "dummy://"
