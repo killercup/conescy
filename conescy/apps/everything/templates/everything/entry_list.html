@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for object in object_list %}
+    <div class="entry">
+        <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+        <p class="meta">written by {{ object.get_author_name }} on {{ object.created }}</p>
+        
+        {{ object.content|safe|truncatewords_html:"100" }}
+    </div>
+{% endfor %}
+
+{% if is_paginated %}
+	{% if has_previous %}
+		<a href="{{request.path}}/?page={{previous}}">&laquo; Vorige Seite</a>
+	{% endif %}
+	{% if has_next %}
+		<a href="{{request.path}}/?page={{next}}">N&auml;chste Seite &raquo;</a>
+	{% endif %}
+{% endif %}
+{% endblock %}
+
+{% endblock %}
