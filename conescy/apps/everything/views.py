@@ -176,6 +176,8 @@ This view also accepts two other keyword arguments:
     
 - ``template_ajax`` to set the template used to display on ajax requests, default is ``search/results.html``
 - ``template_name`` to set the template normally displayed, default is ``search/resultpage.html``
+    
+Fixme: Currently this view does not support pagination, because the ``?page=xx`` would override the ``?s=search`` search-string.
     """
     from django.db.models import Q
     
@@ -192,10 +194,14 @@ This view also accepts two other keyword arguments:
     else:
         e = Entry.objects.select_related().filter(title__contains=s) & Entry.objects.filter(content__contains=s)
     
+    if not kwargs.get("extra_context", False): kwargs["extra_context"] = {}
+    kwargs["extra_context"]["search"] = s
+    
     if request.is_ajax():
         template_ajax = kwargs.get("template_ajax", False) or "search/results.html"
-        # todo: make this use the object_list, too!
-        return render_to_response(template_ajax, {'object_list': e, 'search': s}, context_instance=RequestContext(request))
+        kwargs["template_name"] = template_ajax
+        kwargs["paginate_by"] = None
+        return object_list(request, e, **kwargs)
     else:
         if not kwargs.get("template_name", False): kwargs["template_name"] = "search/resultpage.html"
         return object_list(request, e, **kwargs)

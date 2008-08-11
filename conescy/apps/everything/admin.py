@@ -9,6 +9,7 @@ class EntryAdmin(admin.ModelAdmin):
         ('Extra', {'classes': ('collapse',), 'fields': ('meta', 'slug',) }),
         # todo: display changed field!
     )
+    radio_fields = {"status": admin.HORIZONTAL}
     
     list_display = ('title', 'app', 'author', 'created', 'status')
     list_display_links = ('title',)
