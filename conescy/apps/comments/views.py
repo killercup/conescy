@@ -14,17 +14,15 @@ from conescy.apps.comments.forms import CommentForm
 def save(request, **kwargs):
     """Check if the given comment is valid and then save it.
     
-    To make sure no spam comes in, I've renamed the fieldes:
+To make sure no spam comes in, I've renamed the fieldes:
     
-     - name = 'eins'
+- name = 'eins'
+- mail = 'zwei'
+- url = 'drei' 
     
-     - mail = 'zwei'
+and finally the spam check is called 'author'! ;)
     
-     - url = 'drei' 
-    
-    and finally the spam check is called 'author'! ;)
-    
-    Please note that a comment by a logged in user will only have the fields 'username' and 'content' (and 'date', 'ip' and 'ref') filled!
+Please note that a comment by a logged in user will only have the fields 'username' and 'content' (and 'date', 'ip' and 'ref') filled!
     """
     
     # first spam check. if the "author" field is filled, this is made by a spam bot!

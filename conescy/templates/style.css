@@ -1,0 +1,88 @@
+/* Let's make something simple. */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-size: 13px;
+	width: 500px;
+	margin: 0 auto;
+}
+
+/* @group header/footer */
+
+#header {
+	margin: 30px auto;
+	border-bottom: 1px solid #999;
+	padding-bottom: 15px;
+}
+
+#header h1 {
+	text-align: center;
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	font: small-caps bold 220% Georgia, "Times New Roman", Times, serif;
+}
+
+#header h1 a {
+	color: #111;
+	text-decoration: none;
+}
+
+#footer {
+	margin: 30px auto;
+	border-top: 1px solid #999;
+	padding-top: 5px;
+	color: #999;
+}
+
+#footer p {
+	text-align: center;
+}
+
+#footer a {
+	color: #999;
+}
+
+#footer a:hover {
+	color: #666;
+}
+
+/* @end */
+
+/* @group content */
+
+#content .entry {
+	margin-bottom: 20px;
+}
+
+#content h2 {
+	padding: 5px 0;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#content h2 a {
+	color: #000;
+	text-decoration: none;
+}
+
+#content h2 a:hover {
+	text-decoration: underline;
+}
+
+#content p {
+	line-height: 120%;
+	margin-bottom: 5px;
+}
+
+#content p.meta {
+	padding: 0 0 5px;
+	color: #999;
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* @end */

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>{% block title %}Conescy Test Page{% endblock %}</title>
+    
+    <style type="text/css" media="screen">
+        {% include "style.css" %}
+    </style>
+    
+</head>
+
+<body>
+    <div id="header">
+        <h1><a href="/">Conescy Test Page</a></h1>
+    </div>
+    
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <div id="footer">
+        <p>
+            Powered by <a href="http://conescy.org/">Conescy!</a> and <a href="http://flabs.org/">Design!</a>
+            {% block footer %}{% endblock %}
+        </p>
+    </div>
+</body>
+
+</html>
