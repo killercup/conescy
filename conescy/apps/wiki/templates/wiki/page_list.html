@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>All Wiki Pages</h2>
+    <ul id="pagelist">
+{% for object in object_list %}
+        <li>
+            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            <span> - <a href="{{ object.get_absolute_url }}edit/">Edit</a> - <a href="{{ object.get_absolute_url }}revisions/">Versions</a></span>
+        </li>
+{% endfor %}
+    </ul>
+
+{% include "pagination.html" %}
+
+{% endblock %}

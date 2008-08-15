@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+{% for object in revs %}
+        <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+{% endfor %}
+    </ul>
+
+{% if is_paginated %}
+    {% if has_previous %}
+        <a href="{{request.path}}/?page={{previous}}">Previous</a>
+    {% endif %}
+    {% if has_next %}
+        <a href="{{request.path}}/?page={{next}}">Next</a>
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+<form action="{{ request.path }}" method="post" accept-charset="utf-8">
+    <p><textarea name="content" rows="15" cols="50">{{ object.content }}</textarea></p>
+    <p><label for="tags">Tags: </label><input type="text" name="tags" value="{{ object.tags }}" id="tags" /></p>
+    <p><input type="submit" class="submit" value="Submit &rarr;" /></p>
+</form>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="article">
+        <h2>{% if newpage %}Erstellen:{% else %}Bearbeiten:{% endif %} <a href="{{ object.get_absolute_url }}">{{ object.get_the_title }}</a></h2>
+        <div class="text">
+            {% include "wiki/edit.html" %}
+        </div>
+        
+    </div>
+{% endblock %}

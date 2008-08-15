@@ -11,13 +11,6 @@
     </div>
 {% endfor %}
 
-{% if is_paginated %}
-	{% if has_previous %}
-		<a href="{{request.path}}/?page={{previous}}">&laquo; Vorige Seite</a>
-	{% endif %}
-	{% if has_next %}
-		<a href="{{request.path}}/?page={{next}}">N&auml;chste Seite &raquo;</a>
-	{% endif %}
-{% endif %}
+{% include "pagination.html" %}
 
 {% endblock %}

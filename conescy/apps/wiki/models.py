@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from tagging.fields import TagField
 
 class Page(models.Model):
-    """A simple wiki page"""
+    """A simple wiki page. todo: doc"""
     name = models.CharField("Name", max_length=100, unique=True, db_index=True)
     content = models.TextField("Content")
     tags = TagField()
@@ -46,7 +46,7 @@ class Page(models.Model):
 
 
 class Revision(models.Model):
-    """A revsion of a wiki page"""
+    """A revsion of a wiki page. todo: doc"""
     page = models.ForeignKey(Page)
     revno = models.IntegerField("Revsion Number")
     

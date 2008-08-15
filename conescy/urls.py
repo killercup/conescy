@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # Example Blog:
     url(r'^$', 'django.views.generic.list_detail.object_list', dict(blog_query, paginate_by=10), name="blog-home"),
     url(r'^blog/(?P<slug>.*)/$', 'django.views.generic.list_detail.object_detail', dict(blog_query, slug_field='slug'), name="blog-detail"),
+    
+    # Example Wiki:
+    (r'^wiki/', include('conescy.apps.wiki.urls')),
 
     # Uncomment the next line to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

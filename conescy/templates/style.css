@@ -78,11 +78,31 @@ body {
 	margin-bottom: 5px;
 }
 
+#content a {
+	color: #555;
+}
+
+#content a:hover {
+	color: #000;
+}
+
+#content ul {
+	margin-left: 20px;
+}
+
 #content p.meta {
-	padding: 0 0 5px;
+	padding: 5px 0;
 	color: #999;
 	font-style: italic;
 	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#content p.meta a {
+	color: #999;
+}
+
+#content p.meta a:hover {
+	color: #555;
 }
 
 /* @end */

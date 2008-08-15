@@ -1,0 +1,8 @@
+{% if is_paginated %}
+	{% if has_previous %}
+		<a href="{{request.path}}/?page={{previous}}">Previous</a>
+	{% endif %}
+	{% if has_next %}
+		<a href="{{request.path}}/?page={{next}}">Previous</a>
+	{% endif %}
+{% endif %}

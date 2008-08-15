@@ -9,7 +9,7 @@ from django.views.generic.list_detail import object_list
 from conescy.apps.wiki.models import Page, Revision
 
 def page(request, name):
-    """display a page -- or, if the page is unavailable a creation form"""
+    """display a page -- or, if the page is unavailable a creation form. todo: doc"""
     try:
         page = Page.objects.get(name=name)
         
@@ -29,7 +29,7 @@ def page(request, name):
 
 @login_required
 def edit(request, name):
-    """Edit a wiki site (this also works for ajax edit!)"""
+    """Edit a wiki site (this also works for ajax edit!). todo: doc"""
     try:
         page = Page.objects.get(name=name)
         newpage = False
@@ -65,8 +65,8 @@ def edit(request, name):
             return render_to_response('wiki/edit_page.html', {'object': page, 'newpage': newpage}, context_instance=RequestContext(request))
 
 
-def revs(request, name):
-    """list all revsions of a single page"""
+def revs(request, name, **kwargs):
+    """list all revsions of a single page. todo: doc"""
     wikipage = get_object_or_404(Page, name=name)
     
     if (wikipage.status != 'public') and (not request.user.is_authenticated()):
@@ -77,7 +77,7 @@ def revs(request, name):
     return object_list(request, revs, **kwargs)
     
 def onerev(request, name, revno):
-    """displays one rev of a wikipage"""
+    """displays one rev of a wikipage. todo: doc"""
     wikipage = get_object_or_404(Page, name=name)
     
     if (wikipage.status != 'public') and (not request.user.is_authenticated()):

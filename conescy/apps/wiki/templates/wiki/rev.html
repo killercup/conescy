@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="entry">
+            <h2>Version <a href="{{ rev.get_absolute_url }}">{{ rev.revno }}</a> of "<a href="{{ page.get_absolute_url }}">{{ page.get_the_title }}</a>"</h2>
+            <p class="meta">written by {{ rev.get_author_name }} on {{ rev.created }}</p>
+
+            {{ rev.content|safe }}
+            
+            <p class="meta"><a href="{{ object.get_absolute_url }}edit/">Edit this page</a> - <a href="{{ object.get_absolute_url }}revisions/">Versions</a> - <a href="{% url wiki-home %}">Start</a> - <a href="{% url wiki-toc %}">All Pages</a></p>
+        </div>
+{% endblock %}

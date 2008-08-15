@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="entry" id="wikipagecontent">
+        <h2><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
+            {% include "wiki/page_content.html" %}
+        <p class="meta"><a href="{{ object.get_absolute_url }}edit/">Edit this page</a> - <a href="{{ object.get_absolute_url }}revisions/">Versions</a> - <a href="{% url wiki-home %}">Start</a> - <a href="{% url wiki-toc %}">All Pages</a></p>
+    </div>
+{% endblock %}
