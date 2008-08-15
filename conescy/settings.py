@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'conescy.apps.everything',
     'conescy.apps.comments',
     'conescy.apps.wiki',
+    'conescy.apps.stats',
 )
 
 CACHE_BACKEND = "dummy://"

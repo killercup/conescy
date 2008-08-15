@@ -1,0 +1,107 @@
+{% extends "admin/base_site.html" %}
+{#% load divide %#}
+
+{% block extrahead %}
+    <style type="text/css" media="screen">
+        .left {float:left;}
+        .right {float:right;}
+        .half {width: 45%; margin: 10px 1%; border: 1px solid #ccc; padding: 5px;}
+        .half ul {max-height: 130px; overflow: auto; margin: 10px 0;}
+        .half li {width: 85%; padding:1px;}
+        .half h2 {margin-top: 0;}
+        .half img {display: block; margin-left: auto; margin-right: auto;}
+        li.odd {background: #eee;}
+    </style>
+{% endblock %}
+
+{% block content_title %}<h1><a href="{% url stats-home %}">Statz</a> f&uuml;r den {{ date|date:"d. N Y" }}</h1>{% endblock %}
+
+{% block content %}
+    <div class="half left">
+        <h2>Numbers</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{{ stats.ips|length|divide:10 }},{{ stats.feed_ips|length|divide:10 }}&amp;cht=p3&amp;chl=Site-Visitors|Feedreader&amp;chco=417690" />#}
+        {#<img src="http://chart.apis.google.com/chart?chs=350x60&amp;chd=t:{% if stats.hits %}{{ stats.hits|divide:10 }}{% else %}0{% endif %},{% if stats.feeds %}{{ stats.feeds|divide:10 }}{% else %}0{% endif %},{% if stats.bots %}{{ stats.bots|divide:10 }}{% else %}0{% endif %},{% if stats.ajax %}{{ stats.ajax|divide:10 }}{% else %}0{% endif %}&amp;cht=p&amp;chl=Site|Feeds|Bots|Ajax&amp;chco=417690" />#}
+        {#<img src="http://chart.apis.google.com/chart?chs=350x60&amp;chd=t:{{ anonymous_hits|divide:10 }},{% if stats.user_hits %}{{ stats.user_hits|divide:10 }}{% else %}0{% endif %}&amp;cht=p&amp;chl=Anonym|User&amp;chco=417690" />#}
+        <ul>
+            <li class="even">Unique site visitors: {{ stats.ips|length }}</li>
+            <li class="odd">Site hits: {{ stats.hits }}</li>
+            <li class="even">Anonymous Hits: {{ anonymous_hits }}</li>
+            <li class="odd">User Hits: {% if stats.user_hits %}{{ stats.user_hits }}{% else %}0{% endif %}</li>
+            <li class="even">Unique feed reader: {{ stats.feed_ips|length }}</li>
+            <li class="odd">Feed hits: {{ stats.feeds }}</li>
+            <li class="even">Bot Hits: {{ stats.bots }}</li>
+            <li class="odd">Ajax Requests: {{ stats.ajax }}</li>
+        </ul>
+    </div>
+    
+    {% if site_paths %}
+    <div class="half left">
+        <h2>Requested Pages</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in site_paths|slice:":6" %}{{c.1}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in site_paths|slice:":6" %}{{c.0}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for path in site_paths %}
+            <li class="{% cycle 'even' 'odd' %}">{{ path.0|urlize }} ({{ path.1 }} times)</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% if feed_paths %}
+    <div class="half left">
+        <h2>Requested Feeds</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in feed_paths|slice:":6" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in feed_paths|slice:":6" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for path in feed_paths %}
+            <li class="{% cycle 'even' 'odd' %}">{{ path.0|urlize }} ({{ path.1 }} times)</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% if refs %}
+    <div class="half left">
+        <h2>Referrers</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in refs|slice:":6" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in refs|slice:":6" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for refer in refs %}
+            <li class="{% cycle 'even' 'odd' %}">{{ refer.0|urlize }} ({{ refer.1 }} times)</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% if searchs %}
+    <div class="half left">    
+        <h2>Search Queries</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in searchs|slice:":6" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in searchs|slice:":6" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for search in searchs %}
+            <li class="{% cycle 'even' 'odd' %}">{{ search.0|urlize }} ({{ search.1 }} times)</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% if os or browser_engine %}
+    <div class="half left">    
+        <h2>User Agents</h2>
+        
+        <h3>Operating Systems</h3>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x60&amp;chd=t:{% for c in os|slice:":6" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p&amp;chl={% for c in os|slice:":6" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for s in os %}
+            <li class="{% cycle 'even' 'odd' %}">{{ s.0|urlize }} ({{ s.1 }} times)</li>
+        {% endfor %}
+        </ul>
+        
+        <h3>Browser Engines</h3>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x60&amp;chd=t:{% for c in browser_engine|slice:":6" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p&amp;chl={% for c in browser_engine|slice:":6" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+        <ul>
+        {% for s in browser_engine %}
+            <li class="{% cycle 'even' 'odd' %}">{{ s.0|urlize }} ({{ s.1 }} times)</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <br style="clear: both"/>
+{% endblock %}

@@ -12,10 +12,13 @@ urlpatterns = patterns('',
     
     # Example Wiki:
     (r'^wiki/', include('conescy.apps.wiki.urls')),
-
+    
+    # Conescy.Stats
+    (r'^admin/', include('conescy.apps.stats.urls')),
+    
     # Uncomment the next line to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    
     # Uncomment the next line for to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 )
