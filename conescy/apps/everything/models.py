@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from tagging.fields import TagField
@@ -8,7 +9,7 @@ class Entry(models.Model):
     content = models.TextField("Content")
     tags = TagField()
     
-    created = models.DateTimeField("Created")
+    created = models.DateTimeField("Created", default=datetime.datetime.now)
     changed = models.DateTimeField("Changed", auto_now=True)
     author = models.ForeignKey(User)
     
