@@ -1,12 +1,13 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from conescy.apps.everything.models import Entry
 
 class EntryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     fieldsets = (
-        ('Inhalt', {'fields': ('title', 'content', 'tags',) }),
-        ('Meta', {'fields': ('status', 'created', 'author', 'app',) }),
-        ('Extra', {'classes': ('collapse',), 'fields': ('meta', 'slug',) }),
+        (_('Content'), {'fields': ('title', 'content', 'tags',) }),
+        (_('Meta'), {'fields': ('status', 'created', 'author', 'app',) }),
+        (_('Extra'), {'classes': ('collapse',), 'fields': ('meta', 'slug',) }),
         # todo: display changed field!
     )
     radio_fields = {"status": admin.HORIZONTAL}

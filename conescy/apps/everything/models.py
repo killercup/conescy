@@ -1,32 +1,33 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 
 class Entry(models.Model):
     """A model for as many uses as possible. Only consits of a title, content and tag field and some meta fields like date and author. Additionally it has a text-meta field which can contain any other meta datas, e.g. Python dictionaries or XML data."""
-    title = models.CharField("Title", max_length=200)
-    content = models.TextField("Content")
+    title = models.CharField(_("Title"), max_length=200)
+    content = models.TextField(_("Content"))
     tags = TagField()
     
-    created = models.DateTimeField("Created", default=datetime.datetime.now)
-    changed = models.DateTimeField("Changed", auto_now=True)
+    created = models.DateTimeField(_("Created"), default=datetime.datetime.now)
+    changed = models.DateTimeField(_("Changed"), auto_now=True)
     author = models.ForeignKey(User)
     
-    meta = models.TextField("Metadata", blank=True)
+    meta = models.TextField(_("Metadata"), blank=True)
     STATUS_CHOICES = (
-        ('public', 'Public'),
-        ('private', 'Private'),
-        ('draft', 'Draft'),
+        ('public', _('Public')),
+        ('private', _('Private')),
+        ('draft', _('Draft')),
     )	
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     slug = models.SlugField(unique=True, db_index=True)
     
-    app = models.CharField("Instance", max_length=32)
+    app = models.CharField(_("Instance"), max_length=32)
     
     class Meta:
-        verbose_name = "Entry"
-        verbose_name_plural = "Entries"
+        verbose_name = _("Entry")
+        verbose_name_plural = _("Entries")
         get_latest_by = "created"
         ordering = ['-created']
     

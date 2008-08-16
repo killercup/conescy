@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic.list_detail import object_list
+from django.utils.translation import ugettext as _
 
 from conescy.apps.wiki.models import Page, Revision
 
@@ -14,7 +15,8 @@ def page(request, name):
         page = Page.objects.get(name=name)
         
         if (page.status != 'public') and (not request.user.is_authenticated()):
-            return render_to_response('error.html', {'error': "You are not allowed to view this page!",}, context_instance=RequestContext(request))
+            # todo: raise 404 to hide to viewes that this page exists
+            return render_to_response('error.html', {'error': _("You are not allowed to view this page!"),}, context_instance=RequestContext(request))
         
         # simple redirect of pages with a syntax like this: %redirect:"WikiSeite"%
         redirects = re.findall("%redirect:\"(.*)\"%", page.content)
@@ -70,7 +72,7 @@ def revs(request, name, **kwargs):
     wikipage = get_object_or_404(Page, name=name)
     
     if (wikipage.status != 'public') and (not request.user.is_authenticated()):
-        return render_to_response('error.html', {'error': "You are not allowed to view this page!",}, context_instance=RequestContext(request))
+        return render_to_response('error.html', {'error': _("You are not allowed to view this page!"),}, context_instance=RequestContext(request))
     
     revs = Revision.objects.filter(page=wikipage).order_by('-created')
     
@@ -81,7 +83,7 @@ def onerev(request, name, revno):
     wikipage = get_object_or_404(Page, name=name)
     
     if (wikipage.status != 'public') and (not request.user.is_authenticated()):
-        return render_to_response('error.html', {'error': "You are not allowed to view this page!",}, context_instance=RequestContext(request))
+        return render_to_response('error.html', {'error': _("You are not allowed to view this page!"),}, context_instance=RequestContext(request))
     
     rev = get_object_or_404(Revision, page=wikipage, revno=revno)
     return render_to_response('wiki/rev.html', {'page': wikipage, 'rev': rev}, context_instance=RequestContext(request))

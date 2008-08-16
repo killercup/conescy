@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     # Example Wiki:
     (r'^wiki/', include('conescy.apps.wiki.urls')),
     
+    # Rosetta, cool translations:
+    url(r'^rosetta-i18n/',include('rosetta.urls')),
+    
     # Conescy.Stats
     (r'^admin/', include('conescy.apps.stats.urls')),
     

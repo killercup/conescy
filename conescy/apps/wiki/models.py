@@ -1,26 +1,27 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 
 class Page(models.Model):
     """A simple wiki page. todo: doc"""
-    name = models.CharField("Name", max_length=100, unique=True, db_index=True)
-    content = models.TextField("Content")
+    name = models.CharField(_("Name"), max_length=100, unique=True, db_index=True)
+    content = models.TextField(_("Content"))
     tags = TagField()
     
-    created = models.DateTimeField("Created", default=datetime.datetime.now)
-    changed = models.DateTimeField("Changed", auto_now=True)
+    created = models.DateTimeField(_("Created"), default=datetime.datetime.now)
+    changed = models.DateTimeField(_("Changed"), auto_now=True)
     STATUS_CHOICES = (
-        ('public', 'Public'),
-        ('private', 'Private'),
-        ('draft', 'Draft'),
+        ('public', _('Public')),
+        ('private', _('Private')),
+        ('draft', _('Draft')),
     )    
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     
     class Meta:
-        verbose_name = "Page"
-        verbose_name_plural = "Pages"
+        verbose_name = _("Page")
+        verbose_name_plural = _("Pages")
         get_latest_by = "created"
         ordering = ['-created']
     
@@ -48,16 +49,16 @@ class Page(models.Model):
 class Revision(models.Model):
     """A revsion of a wiki page. todo: doc"""
     page = models.ForeignKey(Page)
-    revno = models.IntegerField("Revsion Number")
+    revno = models.IntegerField(_("Revision Number"))
     
-    content = models.TextField("Content")
+    content = models.TextField(_("Content"))
     
     author = models.ForeignKey(User)
-    created = models.DateTimeField("Created", default=datetime.datetime.now)
+    created = models.DateTimeField(_("Created"), default=datetime.datetime.now)
     
     class Meta:
-        verbose_name = "Revision"
-        verbose_name_plural = "Revisions"
+        verbose_name = _("Revision")
+        verbose_name_plural = _("Revisions")
         get_latest_by = "created"
         ordering = ['-created']
         
@@ -66,7 +67,7 @@ class Revision(models.Model):
         return ('wiki-revision', [self.page, self.revno])
     
     def __unicode__(self):
-        return "Revision %s of %s" % (str(self.revno), self.page)
+        return _('Revision %(revno)s of "%(page)s"') % {'revno': str(self.revno), 'page': self.page}
     
     def get_author_name(self):
         return self.author

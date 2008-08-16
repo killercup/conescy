@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 class Comment(models.Model):
@@ -10,38 +11,38 @@ class Comment(models.Model):
      - The status will be set by the view function (captures spam, set comments to "deleted", etc.), see the views.py!
     """
     # comments can be made by a logged in user
-    username = models.PositiveIntegerField(help_text="If the comment was made by a logged in user, this field contains his/her user id. Otherwise the name, mail and url fields below should be filled.", blank=True, null=True)
+    username = models.PositiveIntegerField(help_text=_("If the comment was made by a logged in user, this field contains his/her user id. Otherwise the name, mail and url fields below should be filled."), blank=True, null=True)
     
     # or by a visitor
-    name = models.CharField(blank=True, max_length=100)
-    mail = models.EmailField(blank=True)
-    url = models.URLField(blank=True, verify_exists=True)
-    ip = models.IPAddressField()
+    name = models.CharField(_("Name"), blank=True, max_length=100)
+    mail = models.EmailField(_("Mail-Address"), blank=True)
+    url = models.URLField(_("Website-URL"), blank=True, verify_exists=True)
+    ip = models.IPAddressField(_("IP-Address"))
     
     # a comment has a text field for the comment itself
-    content = models.TextField()
+    content = models.TextField(_("Content"))
     
     # the date is quite important ;)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(_("Created"), auto_now_add=True)
     
     # here is our relationship the the object we are commenting
     # this will finally look like "blog.entry.15"
-    ref = models.CharField(max_length=50, db_index=True)
+    ref = models.CharField(_("Reference"), max_length=50, db_index=True)
     
     # well, we all hate spam and abuse... let's do something against it!
     STATUS_CHOICES = (
-        ('ok', 'Approved Comment'),
-        ('unsure', 'Spam?'),
-        ('spam', 'Spam!!'),
+        ('ok', _('Approved Comment')),
+        ('unsure', _('Spam?')),
+        ('spam', _('Spam!!')),
         #even if a comment is marked as removed, it is not removed! so you cant do anything wrong!
         #todo: write a function to delete deleted comments after a special time periode!
-        ('deleted', 'Deleted')
+        ('deleted', _('Deleted'))
     )
     status = models.CharField(max_length=16, choices=STATUS_CHOICES)
     
     class Meta:
-        verbose_name = "Comment"
-        verbose_name_plural = "Comments"
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")
         get_latest_by = "date"
         ordering = ['-date']
     
@@ -78,7 +79,7 @@ class Comment(models.Model):
     
     def get_the_title(self):
         """Display a nice 'title' for the comment, based on some meta information."""
-        return "Comment #%i on '%s' by %s" % (self.id, self.get_ref_object().title, self.get_author_name())
+        return _("Comment #%(commentid)s on '%(reference)s' by %(author)s") % {'commentid': str(self.id), 'reference': self.get_ref_object().title, 'author': self.get_author_name()}
     
     def get_creation_date(self):
         return self.date
@@ -87,5 +88,5 @@ class Comment(models.Model):
         return self.content
     
     def __unicode__(self):
-        return 'Comment #%s by %s' % (str(self.id), self.get_author_name())
+        return _('Comment #%(commentid)s by %(author)s') % {'commentid': str(self.id), 'author': self.get_author_name()}
     

@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Conescy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-16 12:24+0200\n"
+"PO-Revision-Date: 2008-08-16 11:54+0100\n"
+"Last-Translator: Pascal Hertleif <killercup@gmail.com>\n"
+"Language-Team: Pascal Hertleif <conescy@pascalhertleif.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Language: German\n"
+
+#: apps/comments/admin.py:7
+msgid "Author"
+msgstr "Autor"
+
+#: apps/comments/admin.py:8 apps/comments/models.py:23
+#: apps/everything/admin.py:8 apps/everything/models.py:10
+#: apps/wiki/models.py:10 apps/wiki/models.py:54
+msgid "Content"
+msgstr "Inhalt"
+
+#: apps/comments/admin.py:9 apps/comments/models.py:30
+msgid "Reference"
+msgstr "Referenz"
+
+#: apps/comments/models.py:14
+msgid "If the comment was made by a logged in user, this field contains his/her user id. Otherwise the name, mail and url fields below should be filled."
+msgstr "Wenn der Kommentar von einem eingeloggten Benutzer gemacht wurde, findest du in diesem Feld seine ID, ansonsten findest du den Namen, Mail-Adresse und Webseiten-URL in den Felder hierdrunter."
+
+#: apps/comments/models.py:17 apps/wiki/models.py:9
+msgid "Name"
+msgstr "Name"
+
+#: apps/comments/models.py:18
+msgid "Mail-Address"
+msgstr "Mail-Adresse"
+
+#: apps/comments/models.py:19
+msgid "Website-URL"
+msgstr "Webseiten-URL"
+
+#: apps/comments/models.py:20
+msgid "IP-Address"
+msgstr "IP-Adresse"
+
+#: apps/comments/models.py:26 apps/everything/models.py:13
+#: apps/wiki/models.py:13 apps/wiki/models.py:57
+msgid "Created"
+msgstr "Erstellt"
+
+#: apps/comments/models.py:34
+msgid "Approved Comment"
+msgstr "Bestätigter Kommentar"
+
+#: apps/comments/models.py:35
+msgid "Spam?"
+msgstr "Spam?"
+
+#: apps/comments/models.py:36
+msgid "Spam!!"
+msgstr "Spam!!"
+
+#: apps/comments/models.py:39
+msgid "Deleted"
+msgstr "Entfernt"
+
+#: apps/comments/models.py:44
+msgid "Comment"
+msgstr "Kommentar"
+
+#: apps/comments/models.py:45
+msgid "Comments"
+msgstr "Kommentare"
+
+#: apps/comments/models.py:82
+#, python-format
+msgid "Comment #%(commentid)s on '%(reference)s' by %(author)s"
+msgstr "Kommentar #%(commentid)s zu '%(reference)s' von %(author)s"
+
+#: apps/comments/models.py:91
+#, python-format
+msgid "Comment #%(commentid)s by %(author)s"
+msgstr "Kommentar #%(commentid)s von %(author)s"
+
+#: apps/comments/views.py:45
+msgid "The 'username' field was filled, but you are not logged in!"
+msgstr "Das Feld \"Username\" wurde ausgefüllt, aber du bis nicht eingeloggt. Komisch!"
+
+#: apps/comments/views.py:64
+msgid "There was a problem with your comment, I'm sorry... :("
+msgstr "Verdammt! Es gab ein Problem mit deinem Kommentar... :("
+
+#: apps/comments/views.py:104
+msgid "You are not allowed to delete that comment!"
+msgstr "Du darfst diesen Kommentar nicht löschen!"
+
+#: apps/everything/admin.py:9
+msgid "Meta"
+msgstr "Metadaten"
+
+#: apps/everything/admin.py:10
+msgid "Extra"
+msgstr "Extra"
+
+#: apps/everything/models.py:9
+msgid "Title"
+msgstr "Titel"
+
+#: apps/everything/models.py:14 apps/wiki/models.py:14
+msgid "Changed"
+msgstr "Geändert"
+
+#: apps/everything/models.py:17
+msgid "Metadata"
+msgstr "Metadaten"
+
+#: apps/everything/models.py:19 apps/wiki/models.py:16
+msgid "Public"
+msgstr "Öffentlich"
+
+#: apps/everything/models.py:20 apps/wiki/models.py:17
+msgid "Private"
+msgstr "Privat"
+
+#: apps/everything/models.py:21 apps/wiki/models.py:18
+msgid "Draft"
+msgstr "Entwurf"
+
+#: apps/everything/models.py:26
+msgid "Instance"
+msgstr "Instanz"
+
+#: apps/everything/models.py:29
+msgid "Entry"
+msgstr "Eintrag"
+
+#: apps/everything/models.py:30
+msgid "Entries"
+msgstr "Einträge"
+
+#: apps/everything/views.py:25
+#, python-format
+msgid "All Articles by %(author)s"
+msgstr "Alle Artikel von %(author)s"
+
+#: apps/everything/views.py:29
+#, python-format
+msgid "Articles by %(author)s"
+msgstr "Artikel von %(author)s"
+
+#: apps/everything/views.py:50
+#, python-format
+msgid "Comment #%(commentid)s to %(entrytitle)s"
+msgstr "Kommentar #%(commentid)s zu %(entrytitle)s"
+
+#: apps/everything/views.py:53 apps/everything/views.py:56
+#, python-format
+msgid "Comments to \"%(entrytitle)s\""
+msgstr "Kommentare zu \"%(entrytitle)s\""
+
+#: apps/everything/views.py:76 apps/everything/views.py:78
+#, python-format
+msgid "Comments in \"%(app)s\""
+msgstr "Kommentare in \"%(app)s\""
+
+#: apps/everything/views.py:189
+msgid "You need to send a searchstring to search for something..."
+msgstr "Du solltest nach etwas suchen, um etwas zu finden."
+
+#: apps/stats/models.py:6
+msgid "Date"
+msgstr "Datum"
+
+#: apps/stats/models.py:7
+msgid "Stats"
+msgstr "Stats"
+
+#: apps/stats/models.py:7
+msgid "Stats of the day, stored in a python dictionary"
+msgstr "Statistiken-Daten für diesen Tag, gespeichert als Python-Dictionary"
+
+#: apps/stats/models.py:10
+msgid "Day"
+msgstr "Tag"
+
+#: apps/stats/models.py:11
+msgid "Days"
+msgstr "Tage"
+
+#: apps/stats/models.py:24
+#, python-format
+msgid "Daily Stats %(date)s"
+msgstr "Tages Stats %(date)s"
+
+#: apps/wiki/models.py:23
+msgid "Page"
+msgstr "Seite"
+
+#: apps/wiki/models.py:24
+msgid "Pages"
+msgstr "Seiten"
+
+#: apps/wiki/models.py:52
+msgid "Revision Number"
+msgstr "Revisions Nummer"
+
+#: apps/wiki/models.py:60
+msgid "Revision"
+msgstr "Revision"
+
+#: apps/wiki/models.py:61
+msgid "Revisions"
+msgstr "Revisionen"
+
+#: apps/wiki/models.py:70
+#, python-format
+msgid "Revision %(revno)s of \"%(page)s\""
+msgstr "Revision %(revno)s von \"%(page)s\""
+
+#: apps/wiki/views.py:19 apps/wiki/views.py:75 apps/wiki/views.py:86
+msgid "You are not allowed to view this page!"
+msgstr "Du darfst diese Seite leider nicht ansehen."

@@ -1,11 +1,12 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from conescy.apps.comments.models import Comment
 
 class CommentAdmin(admin.ModelAdmin):    
     fieldsets = (
-        ('Author', {'fields': ('username', ('name', 'mail', 'url')) }),
-        ('Content', {'fields': ('content', 'status') }),
-        ('Reference', {'classes': 'collapse','fields': ('ref', 'ip') }),
+        (_('Author'), {'fields': ('username', ('name', 'mail', 'url')) }),
+        (_('Content'), {'fields': ('content', 'status') }),
+        (_('Reference'), {'classes': 'collapse','fields': ('ref', 'ip') }),
         # todo: display date field!
     )
     radio_fields = {"status": admin.HORIZONTAL}

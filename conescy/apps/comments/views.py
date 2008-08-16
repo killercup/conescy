@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
+from django.utils.translation import ugettext as _
 
 from conescy.apps.comments.models import Comment
 from conescy.apps.comments.forms import CommentForm
@@ -41,7 +42,7 @@ Please note that a comment by a logged in user will only have the fields 'userna
             )
         else:
             # the "username" field is filled but the user is not logged in?! spam!
-            return render_to_response('error.html', {'error': "The 'username' field was filled, but you are not logged in!",}, context_instance=RequestContext(request))
+            return render_to_response('error.html', {'error': _("The 'username' field was filled, but you are not logged in!"),}, context_instance=RequestContext(request))
     else:
         # this comment was made by normal visitor -- for the stupid field names see above!
         # first check the date with the form and then use the cleaned data
@@ -60,7 +61,7 @@ Please note that a comment by a logged in user will only have the fields 'userna
             )
         else:
             # if the form is not valid, there must be an error somewhere
-            return render_to_response('error.html', {'error': "There was a problem with your comment, I'm sorry... :(",}, context_instance=RequestContext(request))
+            return render_to_response('error.html', {'error': _("There was a problem with your comment, I'm sorry... :("),}, context_instance=RequestContext(request))
     
     # fill the other fields of our comment
     c.ip = request.META.get('REMOTE_ADDR', '')
@@ -100,6 +101,6 @@ def delete(request, comment):
         else:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        return render_to_response('error.html', {'error': "You are not allowed to delete taht comment!",}, context_instance=RequestContext(request))
+        return render_to_response('error.html', {'error': _("You are not allowed to delete that comment!"),}, context_instance=RequestContext(request))
 
 

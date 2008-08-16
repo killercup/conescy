@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     
     'tagging',                              # http://code.google.com/p/django-tagging
+    'rosetta',                              # http://code.google.com/p/django-rosetta/
     
     'conescy.apps.everything',
     'conescy.apps.comments',

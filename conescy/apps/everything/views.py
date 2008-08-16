@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from django.views.generic.list_detail import object_list
+from django.utils.translation import ugettext as _
 
 from conescy.apps.everything.models import Entry
 
@@ -21,11 +22,11 @@ To use this for a feed template, just add ``rss: True`` as keyword argument and 
     e = Entry.objects.filter(author=u, status="public", app=app).order_by("-created")
     
     if not kwargs.get("extra_context", False): kwargs["extra_context"] = {}
-    kwargs["extra_context"]["special"] = "All Articles by %s" % author
+    kwargs["extra_context"]["special"] = _("All Articles by %(author)s") % {'author': author}
     kwargs["extra_context"]["author"] = author
     
     if kwargs.pop("rss", False) == True:
-        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + "Articles by %s" % author
+        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + _("Articles by %(author)s") % {'author': author}
         kwargs["extra_context"]["description"] = kwargs["extra_context"]["title"]
         kwargs["extra_context"]["site"] = Site.objects.get_current().domain
     
@@ -46,13 +47,13 @@ To use this for a feed template, just add ``rss: True`` as keyword argument and 
     cref = "%s.entry.%s" % (app, str(entry.id))
     comments = Comment.objects.filter(ref=cref, status='ok')
     for c in comments:
-        c.get_the_title = "Comment #%i to %s" % (c.id, entry.title)
+        c.get_the_title = _("Comment #%(commentid)s to %(entrytitle)s") % {'commentid': str(c.id), 'entrytitle': entry.title}
         
     if not kwargs.get("extra_context", False): kwargs["extra_context"] = {}
-    kwargs["extra_context"]["special"] = 'Comment to "%s"' % entry.title
+    kwargs["extra_context"]["special"] = _('Comments to "%(entrytitle)s"') % {'entrytitle': entry.title}
     kwargs["extra_context"]["entry"] = entry
     if kwargs.pop("rss", False) == True:
-        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + 'Comment to "%s"' % entry.title
+        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + _('Comments to "%(entrytitle)s"') % {'entrytitle': entry.title}
         kwargs["extra_context"]["description"] = kwargs["extra_context"]["title"]
         kwargs["extra_context"]["link"] = entry.get_absolute_url()
         kwargs["extra_context"]["site"] = Site.objects.get_current().domain
@@ -72,9 +73,9 @@ To use this for a feed template, just add ``rss: True`` as keyword argument and 
     comments = Comment.objects.filter(ref__startswith="%s." % app, status='ok')
     
     if not kwargs.get("extra_context", False): kwargs["extra_context"] = {}
-    kwargs["extra_context"]["special"] = 'Comments in "%s"' % app.capitalize()
+    kwargs["extra_context"]["special"] = _('Comments in "%(app)s"') % {'app': app.capitalize()}
     if kwargs.pop("rss", False) == True:
-        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + 'Comments in "%s"' % app.capitalize()
+        kwargs["extra_context"]["title"] = kwargs["extra_context"].get("name", "") + _('Comments in "%(app)s"') % {'app': app.capitalize()}
         kwargs["extra_context"]["description"] = kwargs["extra_context"]["title"]
         kwargs["extra_context"]["link"] = reverse("%s-home" % app)
         kwargs["extra_context"]["site"] = Site.objects.get_current().domain
@@ -185,7 +186,7 @@ Fixme: Currently this view does not support pagination, because the ``?page=xx``
         s = request.GET["s"]
     else:
         # todo: add an error view!
-        return render_to_response("error.html", {'error': 'You need to send a searchstring to search for something...'}, context_instance=RequestContext(request))
+        return render_to_response("error.html", {'error': _('You need to send a searchstring to search for something...')}, context_instance=RequestContext(request))
     
     if app == False: app =  kwargs.pop("app")
     

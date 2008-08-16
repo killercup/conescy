@@ -1,13 +1,14 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 class Day(models.Model):
     """A day full of stats! This model has a date field and a text field which contains a very cool dict with your stats!"""
-    date = models.DateField("Date", unique=True)
-    stats = models.TextField("Stats", help_text="Stats of the day, stored in a python dictionary")
+    date = models.DateField(_("Date"), unique=True)
+    stats = models.TextField(_("Stats"), help_text=_("Stats of the day, stored in a python dictionary"))
     
     class Meta:
-        verbose_name = "Day"
-        verbose_name_plural = "Days"
+        verbose_name = _("Day")
+        verbose_name_plural = _("Days")
         get_latest_by = "date"
         ordering = ['-date']
     
@@ -20,4 +21,4 @@ class Day(models.Model):
         return eval(self.stats)
     
     def __unicode__(self):
-        return "Daily Stats %s" % str(self.date)
+        return _("Daily Stats %(date)s") % {'date': str(self.date)}
