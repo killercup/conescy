@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load i18n %}
 
 {% block content %}
         <div class="entry">
-            <h2>Version <a href="{{ rev.get_absolute_url }}">{{ rev.revno }}</a> of "<a href="{{ page.get_absolute_url }}">{{ page.get_the_title }}</a>"</h2>
-            <p class="meta">written by {{ rev.get_author_name }} on {{ rev.created }}</p>
+            <h2>{% trans "Version" %} <a href="{{ rev.get_absolute_url }}">{{ rev.revno }}</a> {% trans "of" %} "<a href="{{ page.get_absolute_url }}">{{ page.get_the_title }}</a>"</h2>
+            <p class="meta">{% trans "written by" %} {{ rev.get_author_name|title }} {% trans "on" %} {{ rev.created }}</p>
 
             {{ rev.content|safe }}
             
-            <p class="meta"><a href="{{ object.get_absolute_url }}edit/">Edit this page</a> - <a href="{{ object.get_absolute_url }}revisions/">Versions</a> - <a href="{% url wiki-home %}">Start</a> - <a href="{% url wiki-toc %}">All Pages</a></p>
+            <p class="meta"><a href="{% url wiki-edit page.name %}">{% trans "Edit this page" %}</a> - <a href="{% url wiki-revs page.name %}">{% trans "Versions" %}</a> - <a href="{% url wiki-home %}">{% trans "Start" %}</a> - <a href="{% url wiki-toc %}">{% trans "All Pages" %}</a></p>
         </div>
 {% endblock %}

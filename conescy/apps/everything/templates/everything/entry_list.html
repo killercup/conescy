@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load i18n %}
 
 {% block content %}
 
 {% for object in object_list %}
     <div class="entry">
         <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
-        <p class="meta">written by {{ object.get_author_name }} on {{ object.created }}</p>
+        <p class="meta">{% trans "written by" %} {{ object.get_author_name|title }} {% trans "on" %} {{ object.created }}</p>
         
         {{ object.content|safe|truncatewords_html:"100" }}
     </div>

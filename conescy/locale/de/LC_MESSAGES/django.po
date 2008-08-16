@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Conescy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-16 12:24+0200\n"
+"POT-Creation-Date: 2008-08-16 13:25+0200\n"
 "PO-Revision-Date: 2008-08-16 11:54+0100\n"
 "Last-Translator: Pascal Hertleif <killercup@gmail.com>\n"
 "Language-Team: Pascal Hertleif <conescy@pascalhertleif.de>\n"
@@ -17,7 +17,8 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
-#: apps/comments/admin.py:7
+#: apps/comments/admin.py:7 apps/everything/models.py:15
+#: apps/wiki/models.py:56
 msgid "Author"
 msgstr "Autor"
 
@@ -72,11 +73,16 @@ msgstr "Spam!!"
 msgid "Deleted"
 msgstr "Entfernt"
 
+#: apps/comments/models.py:41 apps/everything/models.py:23
+#: apps/wiki/models.py:20
+msgid "Status"
+msgstr "Status"
+
 #: apps/comments/models.py:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: apps/comments/models.py:45
+#: apps/comments/models.py:45 apps/comments/templates/comments/form.html:3
 msgid "Comments"
 msgstr "Kommentare"
 
@@ -101,6 +107,40 @@ msgstr "Verdammt! Es gab ein Problem mit deinem Kommentar... :("
 #: apps/comments/views.py:104
 msgid "You are not allowed to delete that comment!"
 msgstr "Du darfst diesen Kommentar nicht löschen!"
+
+#: apps/comments/templates/comments/form.html:8
+#, python-format
+msgid "%(comment.date|date:\"d. M Y\")s at %(comment.date|date:\"H:i\")s"
+msgstr "%(comment.date|date:\"d. M Y\")s um %(comment.date|date:\"H:i\")s"
+
+#: apps/comments/templates/comments/form.html:16
+msgid "Write a Comment"
+msgstr "Kommentar schreiben"
+
+#: apps/comments/templates/comments/form.html:19
+msgid "Logged in as"
+msgstr "Eingeloggt als"
+
+#: apps/comments/templates/comments/form.html:22
+msgid "Your Name"
+msgstr "Dein Name"
+
+#: apps/comments/templates/comments/form.html:23
+msgid "EMail (wont be published!)"
+msgstr "Mail (wird nicht veröffentlicht!)"
+
+#: apps/comments/templates/comments/form.html:24
+msgid "Website"
+msgstr "Webseite"
+
+#: apps/comments/templates/comments/form.html:29
+msgid "Spam-Protection!"
+msgstr "Spam-Schutz!"
+
+#: apps/comments/templates/comments/form.html:33
+#: apps/wiki/templates/wiki/edit.html:5
+msgid "Submit"
+msgstr "Abschicken"
 
 #: apps/everything/admin.py:9
 msgid "Meta"
@@ -133,6 +173,10 @@ msgstr "Privat"
 #: apps/everything/models.py:21 apps/wiki/models.py:18
 msgid "Draft"
 msgstr "Entwurf"
+
+#: apps/everything/models.py:24
+msgid "Slug"
+msgstr "URL-Titel"
 
 #: apps/everything/models.py:26
 msgid "Instance"
@@ -175,6 +219,18 @@ msgstr "Kommentare in \"%(app)s\""
 msgid "You need to send a searchstring to search for something..."
 msgstr "Du solltest nach etwas suchen, um etwas zu finden."
 
+#: apps/everything/templates/everything/entry_detail.html:7
+#: apps/everything/templates/everything/entry_list.html:8
+#: apps/wiki/templates/wiki/rev.html:6
+msgid "written by"
+msgstr "geschrieben von"
+
+#: apps/everything/templates/everything/entry_detail.html:7
+#: apps/everything/templates/everything/entry_list.html:8
+#: apps/wiki/templates/wiki/rev.html:6
+msgid "on"
+msgstr "am"
+
 #: apps/stats/models.py:6
 msgid "Date"
 msgstr "Datum"
@@ -191,7 +247,7 @@ msgstr "Statistiken-Daten für diesen Tag, gespeichert als Python-Dictionary"
 msgid "Day"
 msgstr "Tag"
 
-#: apps/stats/models.py:11
+#: apps/stats/models.py:11 apps/stats/templates/stats/home.html:17
 msgid "Days"
 msgstr "Tage"
 
@@ -200,7 +256,92 @@ msgstr "Tage"
 msgid "Daily Stats %(date)s"
 msgstr "Tages Stats %(date)s"
 
-#: apps/wiki/models.py:23
+#: apps/stats/templates/stats/day.html:17 apps/wiki/templates/wiki/rev.html:5
+msgid "of"
+msgstr "von"
+
+#: apps/stats/templates/stats/day.html:21
+msgid "Numbers"
+msgstr "Zahlen"
+
+#: apps/stats/templates/stats/day.html:26
+msgid "Unique site visitors"
+msgstr "Einzelne Webseiten-Besucher"
+
+#: apps/stats/templates/stats/day.html:27
+msgid "Site hits"
+msgstr "Webseiten-Aufrufe"
+
+#: apps/stats/templates/stats/day.html:28
+msgid "Anonymous Hits"
+msgstr "Anonyme Aufrufe"
+
+#: apps/stats/templates/stats/day.html:29
+msgid "User Hits"
+msgstr "Aufrufe von Benutzern"
+
+#: apps/stats/templates/stats/day.html:30
+msgid "Unique feed reader"
+msgstr "Einzelne Feed-Leser"
+
+#: apps/stats/templates/stats/day.html:31
+msgid "Feed hits"
+msgstr "Feed-Aufrufe"
+
+#: apps/stats/templates/stats/day.html:32
+msgid "Bot Hits"
+msgstr "Aufrufe von Bot"
+
+#: apps/stats/templates/stats/day.html:33
+msgid "Ajax Requests"
+msgstr "Ajax-Anfragen"
+
+#: apps/stats/templates/stats/day.html:39
+msgid "Requested Pages"
+msgstr "Angefragte Seiten"
+
+#: apps/stats/templates/stats/day.html:43
+#: apps/stats/templates/stats/day.html:55
+#: apps/stats/templates/stats/day.html:67
+#: apps/stats/templates/stats/day.html:79
+#: apps/stats/templates/stats/day.html:93
+#: apps/stats/templates/stats/day.html:101
+msgid "times"
+msgstr "mal"
+
+#: apps/stats/templates/stats/day.html:51
+msgid "Requested Feeds"
+msgstr "Angefragte Feeds"
+
+#: apps/stats/templates/stats/day.html:63
+msgid "Referrers"
+msgstr "Herkünfte"
+
+#: apps/stats/templates/stats/day.html:75
+msgid "Search Queries"
+msgstr "Suchebegriffe"
+
+#: apps/stats/templates/stats/day.html:87
+msgid "User Agents"
+msgstr "User Agents"
+
+#: apps/stats/templates/stats/day.html:89
+msgid "Operating Systems"
+msgstr "Betriebssyteme"
+
+#: apps/stats/templates/stats/day.html:97
+msgid "Browser Engines"
+msgstr "Browser Engines"
+
+#: apps/stats/templates/stats/home.html:26
+msgid "Progression"
+msgstr "Verlauf"
+
+#: apps/stats/templates/stats/home.html:39
+msgid "Most often requested pages"
+msgstr "Am meisten angefragte Seiten"
+
+#: apps/wiki/models.py:23 apps/wiki/models.py:51
 msgid "Page"
 msgstr "Seite"
 
@@ -228,3 +369,75 @@ msgstr "Revision %(revno)s von \"%(page)s\""
 #: apps/wiki/views.py:19 apps/wiki/views.py:75 apps/wiki/views.py:86
 msgid "You are not allowed to view this page!"
 msgstr "Du darfst diese Seite leider nicht ansehen."
+
+#: apps/wiki/templates/wiki/edit.html:4
+msgid "Tags"
+msgstr "Tags"
+
+#: apps/wiki/templates/wiki/edit_page.html:5
+msgid "Create"
+msgstr "Erstellen"
+
+#: apps/wiki/templates/wiki/edit_page.html:5
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: apps/wiki/templates/wiki/page.html:7
+#: apps/wiki/templates/wiki/page_list.html:10
+#: apps/wiki/templates/wiki/rev.html:10
+msgid "Edit this page"
+msgstr "Diese Seite bearbeiten"
+
+#: apps/wiki/templates/wiki/page.html:7
+#: apps/wiki/templates/wiki/page_list.html:10
+#: apps/wiki/templates/wiki/rev.html:10
+msgid "Versions"
+msgstr "Revisionen"
+
+#: apps/wiki/templates/wiki/page.html:7 apps/wiki/templates/wiki/rev.html:10
+msgid "Start"
+msgstr "Start"
+
+#: apps/wiki/templates/wiki/page.html:7 apps/wiki/templates/wiki/rev.html:10
+msgid "All Pages"
+msgstr "Alle Seiten"
+
+#: apps/wiki/templates/wiki/page_list.html:5
+msgid "All Wiki Pages"
+msgstr "Alle Wiki Seiten"
+
+#: apps/wiki/templates/wiki/rev.html:5
+msgid "Version"
+msgstr "Revision"
+
+#~ msgid ""
+#~ "\n"
+#~ "                Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)s</a> of \"<a href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</a>\"\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)s</a> von \"<a href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</a>\""
+
+#~ msgid ""
+#~ "\n"
+#~ "                written by %(rev.get_author_name)s on %(rev.created)s\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "geschrieben von %(rev.get_author_name)s am %(rev.created)s"
+
+#~ msgid ""
+#~ "\n"
+#~ "        written by %(object.get_author_name)s on %(object.created)s\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "geschrieben von %(object.get_author_name)s am %(object.created)s"
+
+#~ msgid ""
+#~ "\n"
+#~ "            written by %(object.get_author_name)s on %(object.created)s\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "geschrieben von %(object.get_author_name)s am %(object.created)s"

@@ -12,7 +12,7 @@ class Entry(models.Model):
     
     created = models.DateTimeField(_("Created"), default=datetime.datetime.now)
     changed = models.DateTimeField(_("Changed"), auto_now=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, verbose_name=_("Author"))
     
     meta = models.TextField(_("Metadata"), blank=True)
     STATUS_CHOICES = (
@@ -20,8 +20,8 @@ class Entry(models.Model):
         ('private', _('Private')),
         ('draft', _('Draft')),
     )	
-    status = models.CharField(max_length=16, choices=STATUS_CHOICES)
-    slug = models.SlugField(unique=True, db_index=True)
+    status = models.CharField(_("Status"), max_length=16, choices=STATUS_CHOICES)
+    slug = models.SlugField(_("Slug"), unique=True, db_index=True)
     
     app = models.CharField(_("Instance"), max_length=32)
     

@@ -1,13 +1,13 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load i18n %}
 
 {% block content %}
 
-    <h2>All Wiki Pages</h2>
+    <h2>{% trans "All Wiki Pages" %}</h2>
     <ul id="pagelist">
 {% for object in object_list %}
         <li>
             <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            <span> - <a href="{{ object.get_absolute_url }}edit/">Edit</a> - <a href="{{ object.get_absolute_url }}revisions/">Versions</a></span>
+            <small><em> - <a href="{% url wiki-edit object.name %}">{% trans "Edit this page" %}</a> - <a href="{% url wiki-revs object.name %}">{% trans "Versions" %}</a></em></small>
         </li>
 {% endfor %}
     </ul>

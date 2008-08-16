@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{#% load divide %#}
+{#% load divide %#} {% load i18n %}
 
 {% block extrahead %}
 	<style type="text/css" media="screen">
@@ -14,7 +14,7 @@
 
 {% block content %}
 	<div class="half">
-		<h2>Days</h2>
+		<h2>{% trans "Days" %}</h2>
 		<ul>
 			{% for day in days %}
 				<li class="{% cycle 'even' 'odd' %}"><a href="{{ day.get_absolute_url }}">{{day}}</a></li>
@@ -23,7 +23,7 @@
 	</div>
 	
 	<div class="half">
-		<h2>Progression</h2>
+		<h2>{% trans "Progression" %}</h2>
 		<script type="text/javascript" charset="utf-8">
 			$(function () {
 				var site_visitors = {{ site_visitors|safe }};
@@ -36,7 +36,7 @@
 	</div>
 	
 	<div class="half">
-		<h2>Most often requested pages</h2>
+		<h2>{% trans "Most often requested pages" %}</h2>
 		{#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in paths|slice:":4" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in paths|slice:":4" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
 	</div>
 	

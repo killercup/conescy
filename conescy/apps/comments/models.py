@@ -38,7 +38,7 @@ class Comment(models.Model):
         #todo: write a function to delete deleted comments after a special time periode!
         ('deleted', _('Deleted'))
     )
-    status = models.CharField(max_length=16, choices=STATUS_CHOICES)
+    status = models.CharField(_("Status"), max_length=16, choices=STATUS_CHOICES)
     
     class Meta:
         verbose_name = _("Comment")

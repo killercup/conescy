@@ -17,7 +17,7 @@ class Page(models.Model):
         ('private', _('Private')),
         ('draft', _('Draft')),
     )    
-    status = models.CharField(max_length=16, choices=STATUS_CHOICES)
+    status = models.CharField(_("Status"), max_length=16, choices=STATUS_CHOICES)
     
     class Meta:
         verbose_name = _("Page")
@@ -48,12 +48,12 @@ class Page(models.Model):
 
 class Revision(models.Model):
     """A revsion of a wiki page. todo: doc"""
-    page = models.ForeignKey(Page)
+    page = models.ForeignKey(Page, verbose_name=_("Page"))
     revno = models.IntegerField(_("Revision Number"))
     
     content = models.TextField(_("Content"))
     
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, verbose_name=_("Author"))
     created = models.DateTimeField(_("Created"), default=datetime.datetime.now)
     
     class Meta:
