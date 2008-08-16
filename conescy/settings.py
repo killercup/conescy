@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'tagging',                              # http://code.google.com/p/django-tagging
     'rosetta',                              # http://code.google.com/p/django-rosetta/
     
+    'conescy.toolbox',
     'conescy.apps.everything',
     'conescy.apps.comments',
     'conescy.apps.wiki',

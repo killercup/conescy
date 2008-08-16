@@ -2,42 +2,42 @@
 {#% load divide %#} {% load i18n %}
 
 {% block extrahead %}
-	<style type="text/css" media="screen">
-		.half {float: left; width: 45%; margin: 10px 2.5%;}
-		.half li {width: 85%; padding: 3px;}
-		li.odd {background: #eee;}
-	</style>
-	<!--[if IE]><script language="javascript" type="text/javascript" src="/media/js/excanvas.pack.js"></script><![endif]-->
-	<script language="javascript" type="text/javascript" src="/media/js/jquery.js"></script>
-	<script language="javascript" type="text/javascript" src="/media/js/jquery.flot.js"></script>
+    <style type="text/css" media="screen">
+        .half {float: left; width: 45%; margin: 10px 2.5%;}
+        .half li {width: 85%; padding: 3px;}
+        li.odd {background: #eee;}
+    </style>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="/media/js/excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/media/js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/jquery.flot.js"></script>
 {% endblock %}
 
 {% block content %}
-	<div class="half">
-		<h2>{% trans "Days" %}</h2>
-		<ul>
-			{% for day in days %}
-				<li class="{% cycle 'even' 'odd' %}"><a href="{{ day.get_absolute_url }}">{{day}}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
-	
-	<div class="half">
-		<h2>{% trans "Progression" %}</h2>
-		<script type="text/javascript" charset="utf-8">
-			$(function () {
-				var site_visitors = {{ site_visitors|safe }};
-				var feed_visitors = {{ feed_visitors|safe }};
-				
-				$.plot($("#placeholder"), [{label: "Site Visitors", data: site_visitors},{label: "Feeds Reader", data: feed_visitors}], {xaxis: {mode: "time" }, lines: { show: true }, points: { show: true }});
-			});
-		</script>
-		<div id="placeholder" style="width:90%;height:200px;"></div>
-	</div>
-	
-	<div class="half">
-		<h2>{% trans "Most often requested pages" %}</h2>
-		{#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in paths|slice:":4" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in paths|slice:":4" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
-	</div>
-	
+    <div class="half">
+        <h2>{% trans "Days" %}</h2>
+        <ul>
+            {% for day in days %}
+                <li class="{% cycle 'even' 'odd' %}"><a href="{{ day.get_absolute_url }}">{{day}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="half">
+        <h2>{% trans "Progression" %}</h2>
+        <script type="text/javascript" charset="utf-8">
+            $(function () {
+                var site_visitors = {{ site_visitors|safe }};
+                var feed_visitors = {{ feed_visitors|safe }};
+                
+                $.plot($("#placeholder"), [{label: "Site Visitors", data: site_visitors},{label: "Feeds Reader", data: feed_visitors}], {xaxis: {mode: "time" }, lines: { show: true }, points: { show: true }});
+            });
+        </script>
+        <div id="placeholder" style="width:90%;height:200px;"></div>
+    </div>
+    
+    <div class="half">
+        <h2>{% trans "Most often requested pages" %}</h2>
+        {#<img src="http://chart.apis.google.com/chart?chs=350x100&amp;chd=t:{% for c in paths|slice:":4" %}{{c.1|divide:10}}{% if not forloop.last %},{% endif %}{% endfor %}&amp;cht=p3&amp;chl={% for c in paths|slice:":4" %}{{c.0|divide:10}}{% if not forloop.last %}|{% endif %}{% endfor %}&amp;chco=417690" />#}
+    </div>
+    
 {% endblock %}
