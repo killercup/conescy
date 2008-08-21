@@ -94,6 +94,8 @@ INSTALLED_APPS = (
     
     'tagging',                              # http://code.google.com/p/django-tagging
     'rosetta',                              # http://code.google.com/p/django-rosetta/
+    # todo: 'testmaker',                            # http://code.google.com/p/django-testmaker/
+    'django_extensions',                    # http://code.google.com/p/django-command-extensions/
     
     'conescy.toolbox',
     'conescy.apps.everything',
@@ -103,3 +105,4 @@ INSTALLED_APPS = (
 )
 
 CACHE_BACKEND = "dummy://"
+STATS_EXCLUDE = ("/admin", "/favicon.ico", "/media", '/robots.txt')
