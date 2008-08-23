@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Conescy Admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Conescy Administration' %}</h1>
+<script src="http://media.flabs.org/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/media/js/jquery.tablesorter.js" type="text/javascript" charset="utf-8"></script>
+<script src="/media/js/admin.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
