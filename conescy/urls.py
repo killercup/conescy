@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
@@ -13,17 +14,20 @@ urlpatterns = patterns('',
     # Example Wiki:
     (r'^wiki/', include('conescy.apps.wiki.urls')),
     
-    # Rosetta, cool translations:
-    url(r'^rosetta-i18n/',include('rosetta.urls')),
-    
     # Conescy.Stats
     (r'^admin/', include('conescy.apps.stats.urls')),
     
     # Uncomment the next line to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'templates/media/'}),
-    
     # Uncomment the next line for to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        # Rosetta, cool translations:
+        url(r'^rosetta-i18n/',include('rosetta.urls')),
+        # Template Media (admin media lives at /admin/media/)
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'templates/media/'}),
+    )

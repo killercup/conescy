@@ -16,5 +16,26 @@ class EntryAdmin(admin.ModelAdmin):
     list_display_links = ('title',)
     list_filter = ('status', 'app', 'created')
     search_fields = ['title', 'tags', 'content']
+    
+    def add_view(self, request,  *args, **kwargs):
+        self._request = request
+        return super(EntryAdmin, self).add_view(request,  *args, **kwargs)
+    
+    def change_view(self, request, *args, **kwargs):
+        self._request = request
+        return super(EntryAdmin, self).change_view(request,  *args, **kwargs)
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        """Special thanks to Martin Mahner for providing the idea!
+        see: http://www.mahner.org/weblog/spass-mit-newforms-admin-automatische-felder/
+        """
+        field = super(EntryAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        
+        # Preselect current user as author
+        if db_field.name == "author":
+            field.initial = self._request.user.pk
+        return field
+    
+
 
 admin.site.register(Entry, EntryAdmin)
