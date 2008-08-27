@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Conescy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-16 13:25+0200\n"
-"PO-Revision-Date: 2008-08-16 11:54+0100\n"
+"POT-Creation-Date: 2008-08-26 22:27+0200\n"
+"PO-Revision-Date: 2008-08-23 21:57+0100\n"
 "Last-Translator: Pascal Hertleif <killercup@gmail.com>\n"
 "Language-Team: Pascal Hertleif <conescy@pascalhertleif.de>\n"
 "MIME-Version: 1.0\n"
@@ -33,8 +33,13 @@ msgid "Reference"
 msgstr "Referenz"
 
 #: apps/comments/models.py:14
-msgid "If the comment was made by a logged in user, this field contains his/her user id. Otherwise the name, mail and url fields below should be filled."
-msgstr "Wenn der Kommentar von einem eingeloggten Benutzer gemacht wurde, findest du in diesem Feld seine ID, ansonsten findest du den Namen, Mail-Adresse und Webseiten-URL in den Felder hierdrunter."
+msgid ""
+"If the comment was made by a logged in user, this field contains his/her "
+"user id. Otherwise the name, mail and url fields below should be filled."
+msgstr ""
+"Wenn der Kommentar von einem eingeloggten Benutzer gemacht wurde, findest du "
+"in diesem Feld seine ID, ansonsten findest du den Namen, Mail-Adresse und "
+"Webseiten-URL in den Felder hierdrunter."
 
 #: apps/comments/models.py:17 apps/wiki/models.py:9
 msgid "Name"
@@ -98,7 +103,9 @@ msgstr "Kommentar #%(commentid)s von %(author)s"
 
 #: apps/comments/views.py:45
 msgid "The 'username' field was filled, but you are not logged in!"
-msgstr "Das Feld \"Username\" wurde ausgefüllt, aber du bis nicht eingeloggt. Komisch!"
+msgstr ""
+"Das Feld \"Username\" wurde ausgefüllt, aber du bis nicht eingeloggt. "
+"Komisch!"
 
 #: apps/comments/views.py:64
 msgid "There was a problem with your comment, I'm sorry... :("
@@ -410,13 +417,24 @@ msgstr "Alle Wiki Seiten"
 msgid "Version"
 msgstr "Revision"
 
+#: templates/admin/base_site.html:4
+msgid "Conescy Admin"
+msgstr "Conescy Admin"
+
+#: templates/admin/base_site.html:7
+msgid "Conescy Administration"
+msgstr "Conescy Administration"
+
 #~ msgid ""
 #~ "\n"
-#~ "                Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)s</a> of \"<a href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</a>\"\n"
+#~ "                Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)"
+#~ "s</a> of \"<a href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</"
+#~ "a>\"\n"
 #~ "            "
 #~ msgstr ""
 #~ "\n"
-#~ "Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)s</a> von \"<a href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</a>\""
+#~ "Version <a href=\"%(rev.get_absolute_url)s\">%(rev.revno)s</a> von \"<a "
+#~ "href=\"%(page.get_absolute_url)s\">%(page.get_the_title)s</a>\""
 
 #~ msgid ""
 #~ "\n"
