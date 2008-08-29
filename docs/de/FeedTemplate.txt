@@ -1,0 +1,87 @@
+Das Feed Template
+=================
+
+In dem Standard-Template von Conescy ist mit der Datei ``rss.xml`` auch ein Template für einen normalen RSS-Feed enthalten. Da ich mich immer extrem ärgere, wenn ich nur ein Template oder nur eine View-Funktion zu Verfügung hab, und das jeweils andere ergänzen muss, möchte ich hier kurz zusammenfassen, wie man das Template ideal einsetzen kann.
+
+Ein ganz normales Template
+--------------------------
+
+Zunächst sei gesagt, dass die ``rss.xml`` ein ganz normales Template ist, wie jedes andere auch. Nur, dass es eben auf ``xml`` endet, weil ein RSS-Feed keine normale (X)HTML-Seite ist, wie die meisten anderen Templates.
+
+Um es zu benutzen, kannst du es einfach mit ``render_to_response``, einen Generic View oder etwas ähnlichem benutzen.
+
+Die Template Variablen
+----------------------
+
+Um das Template mit dem gewünschten Inhalt zu füllen, enthält es folgende Variablen:
+
+* ``title``: Der Titel des Feeds. So wird der Feed im Feedreader später heißen.
+* ``description``: Eine Beschreibung des Feeds. Wo man die sieht, weiß ich jetzt zwar nicht, aber schaden kann sie nie... ;)
+* ``site``: Die Domain deiner Seite. 
+    **Wichtig:** Dieser Variablen wird ein ``http://`` vorangestellt, d.h., sie darf dieses nicht schon enthalten, ansonsten funktioniert der Link nicht. Sie sieht auf einem Development-Server z.B. so aus: ``localhost:8000``. Am Besten erzeugst du diese Variable mit der Site-App, siehe auch die Beispiele unten.
+* ``link``: Der Link zu der Seite, die zu dem Feed gehört und möglicherweise den gleichen oder einen ähnlichen Inhalt hat wie dieser. 
+    **Wichtig:** Die URL muss relativ sein, d.h. sie darf nicht deine Domain oder gar ein ``http://`` enthalten, sondern nur den hinteren Teil der ganzen URL, z.B. ``/blog/test-eintrag/``.
+* ``object_list``: Das Wichtigste. Der Inhalt des Feeds ist in dieser Variablen. Am besten übergibst du dein Queryset einfach unter dem Namen an das Template. 
+    **Hinweis:** Das Template greift auf einige Funktionen zurück, die deine Objekte in der Liste haben müssen! Konkret: ``get_the_title()``, ``get_absolute_url()``, ``get_the_content()`` und ``get_author_name()``. Siehe auch die ``ModelStandardFunktionen.txt``!
+
+Beispiele
+---------
+
+Das war jetzt alles ziemlich theoretisch, hier was praktisches für die Copy&Paster!
+
+Mit Generic Views
+^^^^^^^^^^^^^^^^^
+
+Wenn man Generic Views zum Anzeigen der eigentlichen Seite benutzt, eignen sie sich meistens auch für den dazugehörigen Feed, da dann auch meistens das Queryset gleich ist. Hier die Stücke für den Feed mit allen Blog-Artikeln::
+
+	from django.conf.urls.defaults import *
+	from conescy.apps.everything.models import *
+	from django.contrib.sites.models import Site
+
+	site = Site.objects.get_current().domain
+	
+	blog_dict = {
+		'queryset': Entry.objects.filter(app="blog").filter(status="public").order_by('-created'),
+	}
+	
+	urlpatterns = patterns('',
+		url(
+			r'^blog/rss/$', 
+			'django.views.generic.list_detail.object_list', 
+			dict(blog_dict, 
+				paginate_by=15, 
+				template_name="rss.xml", 
+				mimetype="application/rss+xml", 
+				extra_context={
+					'title': 'Conescy Test Blog', 
+					'link': '/blog/', 
+					'site': site
+			}), name="blog-rss"
+		),
+	)
+
+In einem eigenen View
+^^^^^^^^^^^^^^^^^^^^^
+
+Hier am Beispiel des Feeds mit allen Kommentaren zu einer Instanz von ``conescy.apps.everything``::
+
+	from django.shortcuts import render_to_response
+	from django.template import RequestContext
+	from conescy.apps.everything.models import *
+	from django.core.urlresolvers import reverse
+	from django.contrib.sites.models import Site
+	from conescy.apps.comments.models import *
+	
+	def comments_feed(request, app):
+		"""a feed with all comments for a specific app"""
+		comments = Comment.objects.filter(ref__startswith="%s." % app)[:15]
+		title = 'Kommentare in "%s"' % app.capitalize()
+		link = reverse("%s-home" % app)
+
+		return render_to_response("rss.xml", {
+			'object_list': comments, 
+			"description": title, 
+			"title": title, 
+			"link": link, 
+			"site": Site.objects.get_current().domain
+			}, context_instance=RequestContext(request))

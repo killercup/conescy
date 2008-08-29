@@ -6,4 +6,4 @@ A list of changes I've made during refactoring Conerscy to "step4", ordered by a
 Everything
 ----------
 
-* renamed field `metaxml` to `meta`
+* renamed field ``metaxml`` to ``meta``

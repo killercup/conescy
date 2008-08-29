@@ -16,7 +16,7 @@ Erster Schritt: Python installieren
 
 Conescy basiert auf Django, einem verdammt coolen Web-Framework für Python. Also brauchen wir als erstes Python!
 
-Da es sehr wahrscheinlich ist, und ich es auch jedem nur empfehlen kann, gehe ich mal davon aus, dass du einen Linux-Server mit Debian hast. Hier ist die Installation denkbar einfach, da du es entweder schon installiert hast, oder nur `apt-get install python` ausführen musst, um es zu installieren. Alle anderen können sich auf [Python.org][python] informieren, wie sie Python installieren.
+Da es sehr wahrscheinlich ist, und ich es auch jedem nur empfehlen kann, gehe ich mal davon aus, dass du einen Linux-Server mit Debian hast. Hier ist die Installation denkbar einfach, da du es entweder schon installiert hast, oder nur ``apt-get install python`` ausführen musst, um es zu installieren. Alle anderen können sich auf [Python.org][python] informieren, wie sie Python installieren.
 
 Bitte achte darauf, dass du ein möglichst aktuelles Python hast, das auf jeden Fall Version 2.4 oder höher ist!
 
@@ -27,56 +27,56 @@ Python basiert auf Modulen, die seine Funktionen ziemlich stark erweitern. Und d
 
 ### [EasyInstall][easyinstall] -- Module einfach installieren
 
-Mit diesem Modul ist die Installation von weiteren Modulen ein Kinderspiel! Um es zu installieren, musst du einfach folgendes als `root` ausführen:
+Mit diesem Modul ist die Installation von weiteren Modulen ein Kinderspiel! Um es zu installieren, musst du einfach folgendes als ``root`` ausführen::
 
 	wget http://peak.telecommunity.com/dist/ez_setup.py
 	python ez_setup.py
 	rm ez_setup.py
 
-Mit `easy_install <Modulname>` solltest du jetzt ganz einfach Python Module in einem Schritt downloaden und installieren können!
+Mit ``easy_install <Modulname>`` solltest du jetzt ganz einfach Python Module in einem Schritt downloaden und installieren können!
 
 ### Ein paar typische Module
 
 Ich empfehle dir für den problemloses Einsatz von Conescy mindestens folgende Module zu installieren:
 
-* `PIL` (falls `easy_install` es nicht findet, versuch es mal mit `easy_install --find-links http://www.pythonware.com/products/pil/ Imaging`!)
-* `docutils`
-* `textile`
-* `pyYaml`
+* ``PIL`` (falls ``easy_install`` es nicht findet, versuch es mal mit ``easy_install --find-links http://www.pythonware.com/products/pil/ Imaging``!)
+* ``docutils``
+* ``textile``
+* ``pyYaml``
 
 Ja nach dem welche Datenbank zu später verwenden möchstest, musst du noch ein entsprechendes Modul dafür installieren:
 
-* `psycopg` für PostgreSQL
-* `MySQLdb` für MySQL
-* `pysqlite` für SQLite
-* `cx_Oracle` für Oracle
+* ``psycopg`` für PostgreSQL
+* ``MySQLdb`` für MySQL
+* ``pysqlite`` für SQLite
+* ``cx_Oracle`` für Oracle
 
 Dritter Schritt: Django installieren
------------------------------
+------------------------------------
 
-Nachdem wir jetzt schon ein paar Module haben, wird es Zeit, dass wir auch [Django][django] installieren. Da wir die neuste Entwickler-Version mit vielen Verbesserungen und neuen Funktionen haben wollen, laden wir es aber nicht über `easy_install`, sondern direkt über `svn` (sofern du kein `svn` hast, solltest du es spätestens jetzt installieren!). 
+Nachdem wir jetzt schon ein paar Module haben, wird es Zeit, dass wir auch [Django][django] installieren. Da wir die neuste Entwickler-Version mit vielen Verbesserungen und neuen Funktionen haben wollen, laden wir es aber nicht über ``easy_install``, sondern direkt über ``svn`` (sofern du kein ``svn`` hast, solltest du es spätestens jetzt installieren!). 
 
-Zudem musst du wissen, wo Python deine Module speichert. Python kann es dir ganz einfach sagen, indem du in der Shell (nicht in Python selbst) das aufrufst:
+Zudem musst du wissen, wo Python deine Module speichert. Python kann es dir ganz einfach sagen, indem du in der Shell (nicht in Python selbst) das aufrufst::
 
 	python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"
 
-Jetzt wechselst du einfach das Verzeichnis, was du gerade gesagt bekommen hast und führst dort den folgenden Befehl aus:
+Jetzt wechselst du einfach das Verzeichnis, was du gerade gesagt bekommen hast und führst dort den folgenden Befehl aus::
 
 	svn co http://code.djangoproject.com/svn/django/trunk/ django
 
-Damit lädt `svn` dir die neuste Version von Django herunter (das kann ein paar Minuten dauern).
+Damit lädt ``svn`` dir die neuste Version von Django herunter (das kann ein paar Minuten dauern).
 
 Vierter Schritt: Django Module installieren
 -------------------------------------------
 
 Conescy benutzt nicht nur ein paar Python-Module, sondern auch ein paar hilfreiche Module für Django, z.B. Tagging oder eine Admin Oberfläche für iPhones.
 
-Da die benutzten Module aber bei jedem Setup variieren, kann ich hier keine genaue Anleitung geben. Schau einfach in die `conescy/settings.py` und such dir bei `INSTALLED_APPS` und in den weiteren Optionen darunter die Module aus, die du brauchen kannst. Du erkennst sie daran, dass ich ihre URL's daneben geschrieben habe.
+Da die benutzten Module aber bei jedem Setup variieren, kann ich hier keine genaue Anleitung geben. Schau einfach in die ``conescy/settings.py`` und such dir bei ``INSTALLED_APPS`` und in den weiteren Optionen darunter die Module aus, die du brauchen kannst. Du erkennst sie daran, dass ich ihre URL's daneben geschrieben habe.
 
 Fünfter Schritt: Conescy installieren
 --------------------------------------
 
-Wenn du das hier liest, solltest du Conescy eigentlich schon haben... deshalb sag ich dir auch nur noch, dass du das Verzeichnis `conescy/conescy/` einfach in dein Python-Modul-Verzichnis (s.o.) kopieren oder verlinken musst, und schon kannst du auf Conescy zugreifen!
+Wenn du das hier liest, solltest du Conescy eigentlich schon haben... deshalb sag ich dir auch nur noch, dass du das Verzeichnis ``conescy/conescy/`` einfach in dein Python-Modul-Verzichnis (s.o.) kopieren oder verlinken musst, und schon kannst du auf Conescy zugreifen!
 
 Sechster Schritt: Dein Projekt erstellen
 ----------------------------------------
@@ -86,9 +86,9 @@ Conescy ist kein Projekt, das du direkt für deine Webseite benutzen kannst und 
 Siebter Schritt: Apache einrichten
 ----------------------------------
 
-Ich will jetzt nicht sonderlich auf die spezielle Konfiguration eingehen, sondern dir einfach nur den Tipp geben, statt der oft empfohlenen `mod_python` die [`mod_wsgi`][mod_wsgi] zu benutzen. Auf unserem Server ist letztere merklich schneller und die Konfiguration ist wirklich einfach. Hier ein kleines Beispiel:
+Ich will jetzt nicht sonderlich auf die spezielle Konfiguration eingehen, sondern dir einfach nur den Tipp geben, statt der oft empfohlenen ``mod_python`` die [``mod_wsgi``][mod_wsgi] zu benutzen. Auf unserem Server ist letztere merklich schneller und die Konfiguration ist wirklich einfach. Hier ein kleines Beispiel:
 
-In deine Apache Konfiguration fügst du folgendes ein:
+In deine Apache Konfiguration fügst du folgendes ein::
 
 	<VirtualHost 127.0.0.1:7814>
 		# definiert deine Subdomain und das Verzeichnis dazu
@@ -106,7 +106,7 @@ In deine Apache Konfiguration fügst du folgendes ein:
 		WSGIScriptAlias / "/var/django/test/test.wsgi"
 	</VirtualHost>
 
-Eine entsprechende WSGI-Konfiguration ist eine kleine Python-Datei, die z.B. so aussieht:
+Eine entsprechende WSGI-Konfiguration ist eine kleine Python-Datei, die z.B. so aussieht::
 
 	import os, sys
 	sys.path.append('/var/django/')

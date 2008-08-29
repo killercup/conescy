@@ -1,0 +1,23 @@
+Conescy Introduction
+====================
+
+Conescy is a collection of cool modules for the Django Python Web-Framework and aims to let you build simple web site quickly and as easy as possible.
+
+Requirements
+-------------
+
+* Python 2.4
+* Django 1.0 alpha1 or higher up and running
+* Several Python and Django modules you need for your site
+
+Quick Install
+-------------
+
+Just download the package and copy or link the `conescy` folder to your Python path.
+
+How to Use
+----------
+
+Since Conescy itself *is not* a working CMS or whatever but a collection of modules to build our site, you need to learn what Conescy modules exist and how to use them (individually).
+
+This is an very early release, so the documentation is not very complete. In further releases I'm going to add some articles on how to integrate Conescy modules in your sites and will add examples.

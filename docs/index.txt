@@ -1,0 +1,38 @@
+.. _index:
+
+
+Conescy documentation
+=====================
+
+Contents:
+
+.. toctree::
+    :maxdepth: 2
+    
+    intro
+
+German Documentation
+--------------------
+
+.. toctree::
+    :maxdepth: 2
+    
+    de/ConescySetup
+    de/FeedTemplate
+    de/ModelStandardFunctions
+
+Internal
+--------
+
+.. toctree::
+    :maxdepth: 2
+    
+    internal/ChangesSinceStep3
+
+Indices and tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
