@@ -1,0 +1,43 @@
+The *Stats* App
+===============
+
+The Idea
+--------
+
+- simple stats
+- based on the httpd header only, no js
+- from middleware or access log
+
+The Model
+---------
+
+.. autoclass:: conescy.apps.stats.models.Day
+
+The Middleware
+--------------
+
+.. autoclass:: conescy.apps.stats.middleware.AddToStats
+	:members:
+
+The Processor
+-------------
+
+.. autofunction:: conescy.apps.stats.processor.process_request
+
+The Access Log Importer
+-----------------------
+
+.. automodule:: conescy.apps.stats.logimport
+	:members:
+
+The Views
+---------
+
+.. automodule:: conescy.apps.stats.views
+	:members:
+
+Utilities
+---------
+
+.. automodule:: conescy.apps.stats.utils
+	:members:

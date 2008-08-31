@@ -1,0 +1,23 @@
+The *Comments* App
+==================
+
+.. warning::
+	This app may be removed in a further version in favor of Django's ``contrib.comments``. I'll have a look at this and will then decide if the ``contrib.comments`` are good enough for Conescy.
+
+The Idea
+--------
+
+- generic
+- one row
+- spam protection made easy
+
+The Model
+---------
+
+.. autoclass:: conescy.apps.comments.models.Comment
+
+The Views
+---------
+
+.. automodule:: conescy.apps.comments.views
+	:members:

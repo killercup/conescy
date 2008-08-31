@@ -4,18 +4,30 @@
 Conescy documentation
 =====================
 
-Contents:
+Guides
+^^^^^^
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
-    intro
+    guides/intro
+
+The Apps
+^^^^^^^^
+
+.. toctree::
+	:maxdepth: 1
+	
+	apps/everything
+	apps/comments
+	apps/wiki
+	apps/stats
 
 German Documentation
 --------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
     de/ConescySetup
     de/FeedTemplate
@@ -25,7 +37,7 @@ Internal
 --------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
     internal/ChangesSinceStep3
 

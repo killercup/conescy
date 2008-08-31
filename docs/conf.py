@@ -177,3 +177,8 @@ latex_use_parts = True
 
 # If false, no module index is generated.
 latex_use_modindex = True
+
+# Some settings for autodoc
+# -------------------------
+
+os.environ["DJANGO_SETTINGS_MODULE"]="conescy.settings"

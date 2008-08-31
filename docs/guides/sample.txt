@@ -1,0 +1,9 @@
+A Sample Setup of Conescy
+=========================
+
+e.g. greennoise|flusicr?
+
+- settings
+- urls
+- templates
+- admin

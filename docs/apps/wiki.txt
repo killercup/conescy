@@ -1,0 +1,16 @@
+The *Wiki* App
+==============
+
+A simple wiki with revisions stored in the DB.
+
+The Model
+---------
+
+.. autoclass:: conescy.apps.wiki.models.Page
+.. autoclass:: conescy.apps.wiki.models.Revision
+
+The Views
+---------
+
+.. automodule:: conescy.apps.wiki.views
+	:members:

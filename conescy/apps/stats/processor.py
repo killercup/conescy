@@ -9,14 +9,16 @@ This will add the following information as a python dict to th model:
 - for bots (have a look at utils.is_bot): just a counter how many bot-hits has been made
 - for ajax hits (uses request.is_ajax()): also just a counter
 - for feed/site hits:
- - a counter of hits (seperated for site/feed)
- - a list of IP's to determinate unique visitors (seperated for site/feed)
- - a dict of different user agents and the number of their uses (seperated for site/feed)
- - a dict of paths and a counter of their requests (seperated for site/feed)
- - a dict of referers and their uses ("internal" for internal referers, this is for site hits only, of course)
- - a dict of search strings and their uses (if the refer is from a search engine, uses utils.is_search, also for site hits only)
- - a counter of hits by "user", visitors with cookies (real users or just commenters)
-    """
+
+  - a counter of hits (seperated for site/feed)
+  - a list of IP's to determinate unique visitors (seperated for site/feed)
+  - a dict of different user agents and the number of their uses (seperated for site/feed)
+  - a dict of paths and a counter of their requests (seperated for site/feed)
+  - a dict of referers and their uses ("internal" for internal referers, this is for site hits only, of course)
+  - a dict of search strings and their uses (if the refer is from a search engine, uses utils.is_search, also for site hits only)
+  - a counter of hits by "user", visitors with cookies (real users or just commenters)
+
+"""
     
     # is the visitor a bot?
     if is_bot(request.META.get("HTTP_USER_AGENT", "")):

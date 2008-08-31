@@ -13,7 +13,7 @@ Requirements
 Quick Install
 -------------
 
-Just download the package and copy or link the `conescy` folder to your Python path.
+Just download the package and copy or link the ``conescy`` folder to your Python path.
 
 How to Use
 ----------

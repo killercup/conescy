@@ -1,0 +1,19 @@
+The *Everything* App
+====================
+
+The Idea
+--------
+
+- generic
+- ...
+
+The Model
+---------
+
+.. autoclass:: conescy.apps.everything.models.Entry
+
+The Views
+---------
+
+.. automodule:: conescy.apps.everything.views
+	:members:
