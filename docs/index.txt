@@ -5,41 +5,40 @@ Conescy documentation
 =====================
 
 Guides
-^^^^^^
+------
 
 .. toctree::
+    :glob:
     :maxdepth: 1
     
-    guides/intro
+    guides/*
 
 The Apps
-^^^^^^^^
+--------
 
 .. toctree::
-	:maxdepth: 1
-	
-	apps/everything
-	apps/comments
-	apps/wiki
-	apps/stats
+    :glob:
+    :maxdepth: 1
+    
+    apps/*
 
 German Documentation
 --------------------
 
 .. toctree::
+    :glob:
     :maxdepth: 1
     
-    de/ConescySetup
-    de/FeedTemplate
-    de/ModelStandardFunctions
-
+    de/*
+    
 Internal
 --------
 
 .. toctree::
+    :glob:
     :maxdepth: 1
     
-    internal/ChangesSinceStep3
+    internal/*
 
 Indices and tables
 ------------------

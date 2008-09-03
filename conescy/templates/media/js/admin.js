@@ -161,6 +161,22 @@ function fieldvalidation() {
      * Currently it does nothing, but I try to implement some functionality soon.
      * My plan was to analyse the fields by use of model definitions via JSON.
      */
+    $("div#content-main form").submit(function(ev) {
+        ev.preventDefault();
+        var unvalid = false;
+        // doesnt work :(
+        $.each($("form input[type='text'], form textarea"), function(index, val) {
+            if ($("form label[for='" + index + "']").hasClass("required") & ($(val).val() == "")) {
+                $(val).parent().addClass("errors").prepend('<ul class="errorlist"><li>This field is required.</li></ul>');
+                var unvalid = true;
+            }
+        });
+        if (unvalid == false) {
+            $(this).submit();
+        } else {
+            $("div#content-main form div").prepend('<p class="errornote">Please correct the errors below.</p>')
+        }
+    });
 }
 
 function authorselection() {
@@ -193,6 +209,7 @@ function all() {
     ajaxpagination();
     ajaxsearch();
     ajaxsearchbacklinks();
+    // todo: sorting by date
     $("div#changelist table").tablesorter({'cssAsc': 'sorted ascending', 'cssDesc': 'sorted descending', 'cssHeader': '',});
     
     ajaxhistory();

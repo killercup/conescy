@@ -1,0 +1,14 @@
+Some Template Tags
+==================
+
+Navi
+----
+
+.. automodule:: conescy.toolbox.templatetags.navi
+	:members:
+
+Search
+------
+
+.. automodule:: conescy.toolbox.templatetags.search
+	:members:
