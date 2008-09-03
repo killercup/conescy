@@ -6,8 +6,7 @@ class CommentAdmin(admin.ModelAdmin):
     fieldsets = (
         (_('Author'), {'fields': ('username', ('name', 'mail', 'url')) }),
         (_('Content'), {'fields': ('content', 'status') }),
-        (_('Reference'), {'classes': 'collapse','fields': ('ref', 'ip') }),
-        # todo: display date field!
+        (_('Meta'), {'classes': 'collapse','fields': ('date', 'ref', 'ip') }),
     )
     radio_fields = {"status": admin.HORIZONTAL}
     

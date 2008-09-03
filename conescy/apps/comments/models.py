@@ -1,3 +1,4 @@
+import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
@@ -23,7 +24,7 @@ class Comment(models.Model):
     content = models.TextField(_("Content"))
     
     # the date is quite important ;)
-    date = models.DateTimeField(_("Created"), auto_now_add=True)
+    date = models.DateTimeField(_("Created"), default=datetime.datetime.now)
     
     # here is our relationship the the object we are commenting
     # this will finally look like "blog.entry.15"
