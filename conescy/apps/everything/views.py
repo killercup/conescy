@@ -199,11 +199,15 @@ Fixme: Currently this view does not support pagination, because the ``?page=xx``
     kwargs["extra_context"]["search"] = s
     
     if request.is_ajax():
-        template_ajax = kwargs.get("template_ajax", False) or "search/results.html"
-        kwargs["template_name"] = template_ajax
+        if not kwargs.get("template_ajax", False): 
+            kwargs["template_ajax"] = "search/results.html"
+        kwargs["template_name"] = kwargs.pop("template_ajax")
         kwargs["paginate_by"] = None
         return object_list(request, e, **kwargs)
     else:
-        if not kwargs.get("template_name", False): kwargs["template_name"] = "search/resultpage.html"
+        if kwargs.get("template_ajax", False): 
+            kwargs.pop("template_ajax")
+        if kwargs.get("template_name", False) == False: 
+            kwargs["template_name"] = "search/resultpage.html"
         return object_list(request, e, **kwargs)
 
